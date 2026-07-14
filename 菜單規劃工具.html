@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>節日菜單規劃</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Georgia','標楷體','DFKai-SB',serif;
+  background: #fff;
+  color: #1a1a1a;
+  min-height: 100vh;
+  color-scheme: light only;
+}
+
+/* ══ TOP NAV ══ */
+.top-nav {
+  background: #2a1f0a;
+  display: flex;
+  align-items: stretch;
+  border-bottom: 3px solid #c9a84c;
+  position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+.nav-brand {
+  padding: 14px 28px;
+  color: #f5e998;
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  font-weight: normal;
+  border-right: 1px solid #4a3520;
+  white-space: nowrap;
+}
+.nav-brand small {
+  display: block;
+  font-size: 0.6rem;
+  color: #c9a84c;
+  letter-spacing: 0.3em;
+  margin-bottom: 2px;
+}
+.nav-tabs {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+}
+.nav-tab {
+  padding: 0 24px;
+  color: #c9a84c;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -3px;
+  transition: all 0.15s;
+  display: flex; align-items: center;
+}
+.nav-tab:hover { color: #f5e998; background: rgba(255,255,255,0.05); }
+.nav-tab.active { color: #f5e998; border-bottom-color: #f5e998; background: rgba(255,255,255,0.07); }
+.nav-right {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 20px;
+  margin-left: auto;
+}
+.persons-box {
+  background: rgba(232,198,102,0.12);
+  border: 1px solid #6f6539;
+  border-radius: 4px;
+  padding: 5px 12px;
+  display: flex; align-items: center; gap: 8px;
+  color: #c9a84c;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}
+.persons-box input {
+  width: 44px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid #6f6539;
+  border-radius: 3px;
+  color: #f5e998;
+  font-size: 1rem;
+  text-align: center;
+  padding: 2px 4px;
+  font-family: inherit;
+}
+.btn-nav {
+  border-radius: 4px; padding: 6px 13px; cursor: pointer;
+  font-size: 0.78rem; letter-spacing: 0.06em; font-family: inherit;
+  border: 1px solid #6f6539; background: none; color: #c9a84c;
+  transition: all 0.15s; white-space: nowrap;
+}
+.btn-nav:hover { background: rgba(201,168,76,0.15); color: #f5e998; }
+
+/* ══ PAGES ══ */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ══════════════════════════════════
+   PAGE 1: 菜單規劃
+══════════════════════════════════ */
+.menu-layout {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  min-height: calc(100vh - 67px);
+}
+
+/* Sidebar */
+.menu-sidebar {
+  background: #faf8f3;
+  border-right: 1px solid #e8e0c8;
+  display: flex; flex-direction: column;
+  position: sticky; top: 67px;
+  height: calc(100vh - 67px);
+  overflow: hidden;
+}
+.sidebar-scroll { flex: 1; overflow-y: auto; padding: 16px 0 0; }
+.sidebar-label {
+  font-size: 0.62rem; letter-spacing: 0.3em; color: #b09060;
+  padding: 0 18px 10px; text-transform: uppercase;
+}
+.yr-group { margin-bottom: 2px; }
+.yr-label {
+  font-size: 0.65rem; color: #c9a84c; letter-spacing: 0.2em;
+  padding: 8px 18px 3px; font-weight: bold;
+}
+.nav-btn {
+  display: block; width: 100%; text-align: left;
+  padding: 8px 18px 8px 26px;
+  border: none; background: none; cursor: pointer;
+  font-family: inherit; font-size: 0.88rem; color: #5a4a2a;
+  letter-spacing: 0.03em; transition: all 0.12s;
+  border-left: 3px solid transparent;
+}
+.nav-btn:hover { background: rgba(201,168,76,0.12); color: #2a1f0a; }
+.nav-btn.active { background: rgba(201,113,15,0.1); color: #c9710f; border-left-color: #c9710f; font-weight: bold; }
+.nav-btn .d-small { display: block; font-size: 0.65rem; color: #b09060; margin-top: 1px; }
+.sidebar-footer {
+  padding: 14px 16px;
+  border-top: 1px solid #e8e0c8;
+  background: #faf8f3;
+}
+.add-session-btn {
+  width: 100%; background: none; border: 1px dashed #c9a84c;
+  border-radius: 4px; padding: 7px 0; cursor: pointer;
+  font-size: 0.78rem; color: #8b7040; letter-spacing: 0.1em;
+  font-family: inherit; transition: all 0.15s;
+}
+.add-session-btn:hover { background: rgba(201,168,76,0.1); color: #c9710f; }
+.new-session-form { display: none; margin-top: 10px; }
+.new-session-form.show { display: block; }
+.ns-row { margin-bottom: 7px; }
+.ns-row label { display: block; font-size: 0.65rem; color: #b09060; letter-spacing: 0.15em; margin-bottom: 3px; }
+.ns-row input, .ns-row select {
+  width: 100%; border: 1px solid #ddd0b0; border-radius: 3px;
+  padding: 5px 8px; font-size: 0.82rem; background: #fff;
+  color: #1a1a1a; font-family: inherit;
+}
+.ns-row input:focus, .ns-row select:focus { outline: none; border-color: #c9710f; }
+.ns-actions { display: flex; gap: 6px; margin-top: 8px; }
+.ns-btn-add {
+  flex: 1; background: #6f6539; color: #f5e998; border: none;
+  border-radius: 3px; padding: 6px 0; cursor: pointer;
+  font-size: 0.78rem; letter-spacing: 0.08em; font-family: inherit;
+}
+.ns-btn-add:hover { background: #c9710f; }
+.ns-btn-cancel {
+  background: none; border: 1px solid #ddd0b0; border-radius: 3px;
+  padding: 6px 10px; cursor: pointer; font-size: 0.78rem;
+  color: #b09060; font-family: inherit;
+}
+.ns-err { color: #8b2020; font-size: 0.7rem; margin-top: 5px; display: none; }
+
+/* Main area */
+.menu-main { padding: 28px 36px 60px; max-width: 860px; }
+.menu-empty { color: #bbb; font-size: 0.9rem; text-align: center; padding: 80px 20px; letter-spacing: 0.05em; }
+
+.menu-hdr { margin-bottom: 24px; padding-bottom: 14px; border-bottom: 2px solid #e8d8a0; }
+.menu-hdr-title { font-size: 1.5rem; color: #2a1f0a; letter-spacing: 0.12em; }
+.menu-hdr-meta { font-size: 0.78rem; color: #b09060; letter-spacing: 0.18em; margin-top: 4px; }
+.menu-hdr-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+.sec-label {
+  font-size: 0.65rem; letter-spacing: 0.32em; color: #b09060;
+  margin: 22px 0 10px; display: flex; align-items: center; gap: 10px;
+  text-transform: uppercase;
+}
+.sec-label::after { content:''; flex:1; height:1px; background:#f0e8d0; }
+
+/* Dish rows */
+.dish-row {
+  display: grid; grid-template-columns: 26px 1fr;
+  padding: 9px 0; border-bottom: 1px solid #f0ead8;
+  gap: 0;
+}
+.dish-row:last-child { border-bottom: none; }
+.dish-num { font-size: 0.7rem; color: #ccc; padding-top: 3px; }
+.dish-body { padding: 0 10px; }
+.dish-name { font-size: 0.98rem; color: #1a1a1a; letter-spacing: 0.03em; }
+.dish-tags { display: flex; flex-wrap: wrap; gap: 4px 6px; margin-top: 5px; }
+
+.ing-tag {
+  font-size: 0.75rem; background: #f5f0e5; border: 1px solid #e0d0a0;
+  border-radius: 2px; padding: 2px 7px; color: #6f6539;
+  cursor: pointer; transition: all 0.12s; letter-spacing: 0.02em;
+}
+.ing-tag:hover { background: rgba(201,113,15,0.12); border-color: #c9710f; color: #8b4010; }
+.ing-tag.linked { background: #e8f4ff; border-color: #90c0e8; color: #1a4a8b; }
+.ing-tag.linked:hover { background: rgba(26,74,139,0.12); }
+.note-badge {
+  font-size: 0.65rem; color: #8b2020; background: rgba(139,32,32,0.07);
+  border: 1px solid rgba(139,32,32,0.18); border-radius: 2px; padding: 1px 5px;
+}
+
+/* Qty panel */
+.qty-panel {
+  background: #fffdf5; border: 1px solid #e8d8a0; border-radius: 4px;
+  padding: 10px 12px; margin-top: 8px; display: none;
+}
+.qty-panel.open { display: block; }
+.qty-panel-hdr {
+  font-size: 0.65rem; color: #b09060; letter-spacing: 0.2em; margin-bottom: 8px;
+}
+.qty-row-item {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.qty-row-item label { flex: 1; font-size: 0.82rem; color: #5a4a2a; }
+.qty-input {
+  width: 58px; border: 1px solid #ddd0b0; border-radius: 3px;
+  padding: 3px 6px; font-size: 0.82rem; text-align: right;
+  background: #fff; color: #1a1a1a; font-family: inherit;
+}
+.qty-input:focus { outline: none; border-color: #c9710f; }
+.qty-unit-lbl { font-size: 0.75rem; color: #b09060; min-width: 36px; }
+.qty-result { font-size: 0.78rem; color: #c9710f; font-weight: bold; min-width: 80px; text-align: right; }
+.qty-type-badge {
+  font-size: 0.65rem; padding: 1px 6px; border-radius: 2px; margin-left: 4px;
+}
+.qt-整份    { background: #fff0e0; color: #8b4010; border: 1px solid #f0c090; }
+.qt-個人份  { background: #e8f4ff; color: #1a4a8b; border: 1px solid #90c0e8; }
+.qt-固定配料 { background: #f0f8e8; color: #3a6020; border: 1px solid #a8d080; }
+
+.add-dish-btn {
+  background: none; border: 1px dashed #ddd0b0; border-radius: 4px;
+  padding: 7px 14px; cursor: pointer; font-size: 0.8rem; color: #b09060;
+  letter-spacing: 0.08em; font-family: inherit; width: 100%; margin-top: 8px;
+  transition: all 0.15s;
+}
+.add-dish-btn:hover { border-color: #c9710f; color: #c9710f; }
+
+.new-dish-form {
+  background: rgba(201,168,76,0.07); border: 1px dashed #c9a84c;
+  border-radius: 5px; padding: 12px; margin-top: 10px; display: none;
+}
+.new-dish-form.show { display: block; }
+.nd-row { margin-bottom: 8px; }
+.nd-row label { display: block; font-size: 0.65rem; color: #b09060; letter-spacing: 0.15em; margin-bottom: 3px; }
+.nd-row input {
+  width: 100%; border: 1px solid #ddd0b0; border-radius: 3px;
+  padding: 5px 8px; font-size: 0.88rem; background: #fff;
+  color: #1a1a1a; font-family: inherit;
+}
+.nd-row input:focus { outline: none; border-color: #c9710f; }
+.nd-actions { display: flex; gap: 8px; margin-top: 8px; }
+.btn-add-dish {
+  background: #c9710f; color: #fff; border: none; border-radius: 3px;
+  padding: 6px 14px; cursor: pointer; font-size: 0.8rem; font-family: inherit;
+}
+.btn-cancel-dish {
+  background: none; border: 1px solid #ddd0b0; border-radius: 3px;
+  padding: 6px 12px; cursor: pointer; font-size: 0.8rem; color: #b09060; font-family: inherit;
+}
+
+/* 地基主 */
+.dizhu-box { margin-top: 28px; border: 1px solid #c9a84c; border-radius: 5px; overflow: hidden; }
+.dizhu-hdr {
+  background: linear-gradient(90deg, #3d1e02, #6f6539);
+  color: #f5e998; padding: 7px 14px; font-size: 0.8rem; letter-spacing: 0.2em;
+}
+.dizhu-body { padding: 10px 14px; }
+.dizhu-item {
+  display: flex; gap: 8px; padding: 4px 0;
+  border-bottom: 1px dotted #e8d8a0; font-size: 0.86rem; color: #5a4a2a;
+}
+.dizhu-item:last-child { border-bottom: none; }
+.dizhu-n { color: #c9a84c; font-size: 0.7rem; min-width: 18px; }
+
+/* Shopping panel */
+.shopping-panel {
+  position: fixed; right: 0; top: 67px;
+  width: 270px; height: calc(100vh - 67px);
+  background: #fffdf5; border-left: 1px solid #e8d8a0;
+  transform: translateX(100%); transition: transform 0.28s ease;
+  overflow-y: auto; z-index: 150; padding: 18px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.shopping-panel.open { transform: translateX(0); }
+.sp-title {
+  font-size: 0.8rem; letter-spacing: 0.18em; color: #2a1f0a;
+  margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;
+}
+.sp-close { background: none; border: none; cursor: pointer; color: #b09060; font-size: 1rem; padding: 2px 5px; }
+.sp-close:hover { color: #2a1f0a; }
+.sp-group-label { font-size: 0.62rem; color: #c9a84c; letter-spacing: 0.2em; margin: 10px 0 4px; }
+.sp-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 4px 0; border-bottom: 1px dotted #e8d8a0; font-size: 0.83rem;
+}
+.sp-name { color: #2a1f0a; }
+.sp-qty { font-size: 0.76rem; color: #c9710f; font-weight: bold; }
+.sp-empty { color: #ccc; font-size: 0.82rem; padding: 20px 0; text-align: center; }
+
+/* Print overlay */
+.print-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(40,28,8,0.6); z-index: 300;
+  align-items: center; justify-content: center;
+}
+.print-overlay.open { display: flex; }
+.print-card {
+  background: #fffef8; border: 1px solid #c9a84c;
+  width: 460px; min-height: 520px; padding: 50px 46px 46px;
+  position: relative; box-shadow: 0 12px 60px rgba(40,28,8,0.4);
+  display: flex; flex-direction: column;
+}
+.print-card::before { content:''; position:absolute; inset:8px; border:1px solid rgba(201,168,76,0.35); pointer-events:none; }
+.pc-close { position:absolute; top:13px; right:14px; background:none; border:none; cursor:pointer; color:#b09060; font-size:0.95rem; padding:4px 7px; font-family:inherit; }
+.pc-do { position:absolute; top:13px; right:72px; background:none; border:1px solid #c9a84c; border-radius:3px; cursor:pointer; color:#6f6539; font-size:0.76rem; letter-spacing:0.1em; padding:4px 11px; font-family:inherit; }
+.pc-do:hover { background:#6f6539; color:#fff; }
+.pc-eyebrow { font-size:0.6rem; letter-spacing:0.42em; color:#b09060; text-align:center; margin-bottom:20px; text-transform:uppercase; }
+.pc-divider { width:100%; height:1px; background:linear-gradient(90deg,transparent,#c9a84c 30%,#c9a84c 70%,transparent); margin-bottom:26px; }
+.pc-title { font-size:1.9rem; color:#2a1f0a; text-align:center; letter-spacing:0.14em; font-weight:normal; line-height:1.2; margin-bottom:6px; }
+.pc-date { font-size:0.78rem; color:#b09060; text-align:center; letter-spacing:0.2em; margin-bottom:28px; }
+.pc-mid { width:56px; height:1px; background:#c9a84c; margin:0 auto 26px; }
+.pc-dishes { flex:1; list-style:none; }
+.pc-dish { display:flex; align-items:baseline; gap:10px; padding:6px 0; border-bottom:1px dotted #e0d0b0; font-size:0.98rem; color:#1a1a1a; }
+.pc-dish:last-child { border-bottom:none; }
+.pc-dnum { font-size:0.65rem; color:#b09060; min-width:18px; }
+.pc-footer { margin-top:26px; text-align:center; font-size:0.58rem; color:#c9a84c; letter-spacing:0.3em; text-transform:uppercase; }
+
+@media print {
+  .top-nav, .menu-sidebar, .shopping-panel, .print-overlay .pc-close, .print-overlay .pc-do { display:none!important; }
+  .menu-layout { display:none; }
+  .print-overlay { display:block!important; position:static; background:none; }
+  .print-card { width:100%; box-shadow:none; border:none; outline:none; padding:20mm 24mm; }
+  .print-card::before { display:none; }
+}
+
+/* ══════════════════════════════════
+   PAGE 2: 食材資料庫
+══════════════════════════════════ */
+.db-toolbar {
+  padding: 11px 36px; background: #f8f8f8; border-bottom: 1px solid #e8e8e8;
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  position: sticky; top: 67px; z-index: 100;
+}
+.db-search {
+  flex:1; min-width:150px; max-width:230px;
+  border:1px solid #d8d8d8; border-radius:4px; padding:6px 11px;
+  font-size:0.86rem; background:#fff; color:#1a1a1a; font-family:inherit;
+}
+.db-search:focus { outline:none; border-color:#c9710f; }
+.db-sel {
+  border:1px solid #d8d8d8; border-radius:4px; padding:6px 9px;
+  font-size:0.8rem; background:#fff; color:#1a1a1a; font-family:inherit; cursor:pointer;
+}
+.db-sel:focus { outline:none; border-color:#c9710f; }
+.db-count { font-size:0.76rem; color:#aaa; margin-left:auto; }
+.btn-db-add {
+  background:none; border:1px solid #d8d8d8; border-radius:4px;
+  padding:6px 13px; cursor:pointer; font-size:0.78rem; color:#666;
+  font-family:inherit; transition:all 0.13s;
+}
+.btn-db-add:hover { border-color:#c9710f; color:#c9710f; }
+
+.db-legend {
+  padding:8px 36px; background:#fff; border-bottom:1px solid #f0f0f0;
+  display:flex; gap:18px; flex-wrap:wrap; align-items:center;
+}
+.leg-title { font-size:0.62rem; color:#aaa; letter-spacing:0.2em; }
+.leg-item { display:flex; align-items:center; gap:5px; font-size:0.72rem; color:#555; }
+
+.db-table-wrap { padding:0 36px 60px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; font-size:0.86rem; }
+thead th {
+  text-align:left; padding:9px 11px; font-size:0.65rem; letter-spacing:0.2em;
+  color:#999; border-bottom:2px solid #ebebeb; white-space:nowrap;
+  cursor:pointer; user-select:none; font-weight:normal;
+  background:#fff; position:sticky; top:116px;
+}
+thead th:hover { color:#c9710f; }
+.sort-arr { font-size:0.58rem; margin-left:3px; }
+tbody tr { border-bottom:1px solid #f5f5f5; transition:background 0.08s; }
+tbody tr:hover { background:#fdf8f2; }
+tbody tr.prow { color:#bbb; }
+tbody td { padding:8px 11px; vertical-align:middle; color:#1a1a1a; }
+td.cn { color:#ccc; font-size:0.7rem; width:36px; }
+td.cname { font-size:0.93rem; min-width:88px; }
+td.cdish { min-width:100px; }
+td.ccat  { min-width:86px; }
+td.cunit { min-width:76px; }
+td.cconv { min-width:150px; color:#555; font-size:0.8rem; }
+td.cnote { min-width:110px; font-size:0.76rem; color:#999; font-style:italic; }
+
+.cat-badge {
+  display:inline-block; font-size:0.7rem; padding:2px 8px; border-radius:20px;
+  cursor:pointer; border:1px solid transparent; transition:opacity 0.12s; white-space:nowrap;
+}
+.cat-badge:hover { opacity:0.75; }
+.cat-蔬菜   { background:#e8f5e2; border-color:#b5dba6; color:#2e6b1a; }
+.cat-禽畜   { background:#fef0e0; border-color:#f0c89a; color:#7a3b10; }
+.cat-海鮮   { background:#e0f0fa; border-color:#9acce0; color:#1a5070; }
+.cat-豆蛋   { background:#fdf8e0; border-color:#e0d080; color:#6b5a10; }
+.cat-辛香料  { background:#f8e8f8; border-color:#d8a0d8; color:#6b1a6b; }
+.cat-醬料   { background:#f0e8e0; border-color:#c8a888; color:#5a3820; }
+.cat-現成品  { background:#e8e8f8; border-color:#a0a0d8; color:#2a2a6b; }
+.cat-穀糧   { background:#f5f0e5; border-color:#d0c080; color:#5a4a20; }
+.cat-乳製品  { background:#f0f8f0; border-color:#90c8a0; color:#206040; }
+.cat-乾貨   { background:#fff8ec; border-color:#e8c880; color:#8b5e00; }
+.cat-湯底   { background:#ecf4ff; border-color:#90b8e8; color:#1a3a6b; }
+.cat-未分類  { background:#f2f2f2; border-color:#d8d8d8; color:#888; }
+
+.dish-badge {
+  display:inline-block; font-size:0.7rem; padding:2px 7px; border-radius:3px;
+  cursor:pointer; white-space:nowrap; transition:opacity 0.12s;
+}
+.dish-badge:hover { opacity:0.75; }
+.dish-整份    { background:#fff0e0; color:#8b4010; border:1px solid #f0c090; }
+.dish-個人份  { background:#e8f4ff; color:#1a4a8b; border:1px solid #90c0e8; }
+.dish-固定配料 { background:#f0f8e8; color:#3a6020; border:1px solid #a8d080; }
+.dish-pending { background:#f5f5f5; color:#aaa; border:1px dashed #ccc; }
+.pstar { color:#c9710f; font-size:0.65rem; margin-left:2px; }
+
+select.isel {
+  border:1px solid #d8d8d8; border-radius:3px; padding:3px 6px;
+  font-size:0.78rem; background:#fff; color:#1a1a1a; font-family:inherit; cursor:pointer;
+}
+select.isel:focus { outline:none; border-color:#c9710f; }
+.cinput {
+  border:1px solid #d8d8d8; border-radius:3px; padding:3px 5px;
+  font-size:0.78rem; background:#fff; color:#1a1a1a; font-family:inherit;
+}
+.cinput:focus { outline:none; border-color:#c9710f; }
+.conv-pending { font-size:0.76rem; color:#bbb; cursor:pointer; }
+.conv-pending:hover { color:#c9710f; }
+.del-btn {
+  background:none; border:none; cursor:pointer; color:#d8d8d8;
+  font-size:0.83rem; padding:2px 5px; border-radius:3px; transition:all 0.1s;
+}
+.del-btn:hover { background:#fff0f0; color:#cc3333; }
+
+.add-row { background:#fdfdf8; }
+.add-row td { padding:7px 11px; border-bottom:2px dashed #e8e0c0; }
+.add-inp {
+  width:100%; border:1px solid #d8d8d8; border-radius:3px; padding:5px 7px;
+  font-size:0.84rem; background:#fff; color:#1a1a1a; font-family:inherit;
+}
+.add-inp:focus { outline:none; border-color:#c9710f; }
+.icon-btn {
+  background:none; border:none; cursor:pointer; color:#aaa; font-size:0.83rem;
+  padding:3px 6px; border-radius:3px; transition:all 0.1s;
+}
+.icon-btn:hover { background:#f0f0f0; color:#333; }
+
+/* Export modal */
+.modal-overlay {
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,0.3);
+  z-index:400; align-items:center; justify-content:center;
+}
+.modal-overlay.open { display:flex; }
+.modal-box {
+  background:#fff; border:1px solid #e0e0e0; border-radius:7px;
+  padding:30px 34px; width:330px; box-shadow:0 8px 40px rgba(0,0,0,0.12);
+}
+.modal-title { font-size:0.98rem; color:#1a1a1a; letter-spacing:0.08em; margin-bottom:16px; }
+.modal-opt {
+  display:flex; align-items:flex-start; gap:11px; padding:11px 0;
+  border-bottom:1px solid #f0f0f0; cursor:pointer;
+}
+.modal-opt:last-of-type { border-bottom:none; }
+.modal-opt:hover .mo-name { color:#c9710f; }
+.mo-icon { font-size:1.25rem; min-width:24px; text-align:center; }
+.mo-name { font-size:0.86rem; color:#1a1a1a; }
+.mo-desc { font-size:0.7rem; color:#aaa; margin-top:2px; }
+.modal-close {
+  margin-top:14px; width:100%; background:none; border:1px solid #e0e0e0;
+  border-radius:4px; padding:7px; cursor:pointer; font-size:0.8rem;
+  color:#aaa; font-family:inherit;
+}
+.modal-close:hover { border-color:#c9710f; color:#c9710f; }
+
+/* Toast */
+.toast {
+  position:fixed; bottom:22px; right:28px; background:#2a1f0a; color:#f5e998;
+  padding:8px 16px; border-radius:4px; font-size:0.78rem; letter-spacing:0.06em;
+  opacity:0; transform:translateY(6px); transition:all 0.2s;
+  pointer-events:none; z-index:500;
+}
+.toast.show { opacity:1; transform:translateY(0); }
+.empty-row td { text-align:center; padding:48px; color:#ccc; font-size:0.84rem; }
+</style>
+</head>
+<body>
+
+<!-- ══ TOP NAV ══ -->
+<nav class="top-nav">
+  <div class="nav-brand"><small>FESTIVAL MENU PLANNER</small>節日菜單規劃</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchPage('menu',this)">菜單規劃</button>
+    <button class="nav-tab" onclick="switchPage('db',this)">食材資料庫</button>
+  </div>
+  <div class="nav-right">
+    <div class="persons-box" id="personsBox">
+      用餐人數
+      <input type="number" id="personsInput" value="8" min="1" max="99">
+      人
+    </div>
+    <button class="btn-nav" id="printBtn" style="display:none" onclick="openPrint()">列印菜單 ▤</button>
+    <button class="btn-nav" id="shopBtn" style="display:none" onclick="toggleShopping()">採購清單 ▸</button>
+    <button class="btn-nav" id="exportBtn" style="display:none" onclick="openExportModal()">匯出 ↓</button>
+  </div>
+</nav>
+
+<!-- ══ PAGE 1: 菜單規劃 ══ -->
+<div class="page active" id="page-menu">
+  <div class="menu-layout">
+    <!-- sidebar -->
+    <aside class="menu-sidebar">
+      <div class="sidebar-scroll">
+        <div class="sidebar-label">節慶目錄</div>
+        <div id="navList"></div>
+      </div>
+      <div class="sidebar-footer">
+        <button class="add-session-btn" onclick="toggleNewSessionForm()">＋ 新增場次</button>
+        <div class="new-session-form" id="newSessionForm">
+          <div class="ns-row">
+            <label>節日名稱</label>
+            <select id="ns-festival">
+              <option>除夕</option><option>初二</option><option>清明</option>
+              <option>端午</option><option>中元</option><option>重陽</option>
+              <option value="__custom__">自訂…</option>
+            </select>
+          </div>
+          <div class="ns-row" id="ns-custom-row" style="display:none">
+            <label>自訂名稱</label>
+            <input id="ns-custom-name" placeholder="例：冬至">
+          </div>
+          <div class="ns-row">
+            <label>年份</label>
+            <input id="ns-year" type="number" placeholder="2027" min="2000" max="2099">
+          </div>
+          <div class="ns-row">
+            <label>日期</label>
+            <input id="ns-date" placeholder="2027.01.28 THU.">
+          </div>
+          <div class="ns-actions">
+            <button class="ns-btn-add" onclick="addNewSession()">建立</button>
+            <button class="ns-btn-cancel" onclick="toggleNewSessionForm()">取消</button>
+          </div>
+          <div class="ns-err" id="ns-err"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- main -->
+    <main class="menu-main" id="menuMain">
+      <div class="menu-empty">← 請從左側選擇節日</div>
+    </main>
+  </div>
+</div>
+
+<!-- ══ PAGE 2: 食材資料庫 ══ -->
+<div class="page" id="page-db">
+  <div class="db-toolbar">
+    <input class="db-search" type="text" placeholder="搜尋食材名稱…" id="dbSearch" oninput="renderDB()">
+    <select class="db-sel" id="dbCatFilter" onchange="renderDB()">
+      <option value="">全部類別</option>
+      <option>蔬菜</option><option>禽畜</option><option>海鮮</option><option>豆蛋</option>
+      <option>辛香料</option><option>醬料</option><option>現成品</option><option>穀糧</option>
+      <option>乳製品</option><option>乾貨</option><option>湯底</option><option>未分類</option>
+    </select>
+    <select class="db-sel" id="dbDishFilter" onchange="renderDB()">
+      <option value="">全部類型</option>
+      <option>整份料理</option><option>個人份</option><option>固定配料</option><option>未設定</option>
+    </select>
+    <span class="db-count" id="dbCount"></span>
+    <button class="btn-db-add" onclick="showDBAddRow()">＋ 新增食材</button>
+  </div>
+  <div class="db-legend">
+    <span class="leg-title">菜餚類型</span>
+    <span class="leg-item"><span class="dish-badge dish-整份">整份料理</span>&nbsp;整尾魚、整隻雞 — 設定「幾人一份」</span>
+    <span class="leg-item"><span class="dish-badge dish-個人份">個人份</span>&nbsp;蝦、肉類 — 設定「每人用量」</span>
+    <span class="leg-item"><span class="dish-badge dish-固定配料">固定配料</span>&nbsp;蔥薑蒜、醬料 — 固定總量</span>
+  </div>
+  <div class="db-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="cn">#</th>
+          <th onclick="dbSortBy('name')">名稱 <span class="sort-arr" id="arr-name">↕</span></th>
+          <th onclick="dbSortBy('cat')">類別 <span class="sort-arr" id="arr-cat">↕</span></th>
+          <th onclick="dbSortBy('dishType')">菜餚類型 <span class="sort-arr" id="arr-dish">↕</span> <span style="color:#c9a84c;font-size:0.58rem">★</span></th>
+          <th onclick="dbSortBy('unit')">採購單位 <span class="sort-arr" id="arr-unit">↕</span></th>
+          <th>採購換算 <span style="color:#c9a84c;font-size:0.58rem">★</span></th>
+          <th>別名／備註</th>
+          <th style="width:40px"></th>
+        </tr>
+      </thead>
+      <tbody id="dbTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Shopping panel -->
+<div class="shopping-panel" id="shoppingPanel">
+  <div class="sp-title">
+    採購清單
+    <button class="sp-close" onclick="toggleShopping()">✕</button>
+  </div>
+  <div id="spContent"><div class="sp-empty">尚未設定份量</div></div>
+</div>
+
+<!-- Print overlay -->
+<div class="print-overlay" id="printOverlay">
+  <div class="print-card">
+    <button class="pc-do" onclick="window.print()">列　印</button>
+    <button class="pc-close" onclick="closePrint()">✕ 關閉</button>
+    <div class="pc-eyebrow" id="pc-eyebrow">FESTIVAL MENU</div>
+    <div class="pc-divider"></div>
+    <div class="pc-title" id="pc-title">—</div>
+    <div class="pc-date" id="pc-date">—</div>
+    <div class="pc-mid"></div>
+    <ul class="pc-dishes" id="pc-dishes"></ul>
+    <div class="pc-footer">— 敬　請　慢　用 —</div>
+  </div>
+</div>
+
+<!-- Export modal -->
+<div class="modal-overlay" id="exportModal">
+  <div class="modal-box">
+    <div class="modal-title">匯出食材資料庫</div>
+    <div class="modal-opt" onclick="exportCSV()">
+      <span class="mo-icon">📄</span>
+      <div><div class="mo-name">CSV 格式</div><div class="mo-desc">可用 Excel、Numbers 開啟</div></div>
+    </div>
+    <div class="modal-opt" onclick="exportJSON()">
+      <span class="mo-icon">{ }</span>
+      <div><div class="mo-name">JSON 格式</div><div class="mo-desc">備份食材資料庫</div></div>
+    </div>
+    <button class="modal-close" onclick="closeExportModal()">取消</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ════════════════════════════════════════════════
+// 共用工具
+// ════════════════════════════════════════════════
+function getPersons() { return parseInt(document.getElementById('personsInput').value)||8; }
+let toastTimer;
+function showToast(msg) {
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// ════════════════════════════════════════════════
+// 頁面切換
+// ════════════════════════════════════════════════
+function switchPage(p, tabEl) {
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(el=>el.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  if (tabEl) tabEl.classList.add('active');
+  const isMenu = p==='menu';
+  document.getElementById('printBtn').style.display  = (isMenu&&currentMenu)?'':'none';
+  document.getElementById('shopBtn').style.display   = (isMenu&&currentMenu)?'':'none';
+  document.getElementById('exportBtn').style.display = isMenu?'none':'';
+  if(p==='db') renderDB();
+}
+
+// ════════════════════════════════════════════════
+// 食材資料庫
+// ════════════════════════════════════════════════
+let db = [
+  {id:1,  name:"豬肉",    cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:150, convUnit:"g",  aliases:[], note:""},
+  {id:2,  name:"二層肉",  cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:150, convUnit:"g",  aliases:[], note:"梅花與腹脅之間"},
+  {id:3,  name:"三層肉",  cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:150, convUnit:"g",  aliases:["五花肉"], note:""},
+  {id:4,  name:"三層肉條",cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:150, convUnit:"g",  aliases:[], note:"整條帶骨"},
+  {id:6,  name:"梅花肉片",cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:120, convUnit:"g",  aliases:[], note:""},
+  {id:7,  name:"豬小排",  cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:150, convUnit:"g",  aliases:[], note:""},
+  {id:8,  name:"排骨",    cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:150, convUnit:"g",  aliases:[], note:""},
+  {id:9,  name:"肋排",    cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:150, convUnit:"g",  aliases:["箅仔骨"], note:"台語：箅仔骨"},
+  {id:11, name:"豬肝",    cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:""},
+  {id:12, name:"粉肝",    cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:"嫩煮豬肝"},
+  {id:13, name:"大腸",    cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:""},
+  {id:14, name:"鹹豬肉",  cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:""},
+  {id:15, name:"臘肉",    cat:"禽畜",  dishType:"固定配料",unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:""},
+  {id:16, name:"豬排",    cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:150, convUnit:"g",  aliases:[], note:""},
+  {id:17, name:"雞腿肉",  cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:150, convUnit:"g",  aliases:[], note:""},
+  {id:18, name:"雞里肌肉",cat:"禽畜",  dishType:"個人份",  unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:""},
+  {id:19, name:"烏骨雞",  cat:"禽畜",  dishType:"整份",    unit:"隻",   convQty:8,   convUnit:"人/隻",aliases:[], note:""},
+  {id:20, name:"土雞",    cat:"禽畜",  dishType:"整份",    unit:"隻",   convQty:8,   convUnit:"人/隻",aliases:[], note:""},
+  {id:21, name:"甘蔗雞",  cat:"現成品",dishType:"整份",    unit:"隻",   convQty:8,   convUnit:"人/隻",aliases:[], note:"煙燻現成品"},
+  {id:22, name:"海石斑",  cat:"海鮮",  dishType:"整份",    unit:"尾",   convQty:8,   convUnit:"人/尾",aliases:[], note:""},
+  {id:23, name:"石斑",    cat:"海鮮",  dishType:"整份",    unit:"尾",   convQty:8,   convUnit:"人/尾",aliases:["石斑魚"], note:""},
+  {id:24, name:"龍虎石斑",cat:"海鮮",  dishType:"整份",    unit:"尾",   convQty:8,   convUnit:"人/尾",aliases:[], note:"大型品種"},
+  {id:26, name:"金目鱸魚",cat:"海鮮",  dishType:"整份",    unit:"尾",   convQty:8,   convUnit:"人/尾",aliases:[], note:""},
+  {id:27, name:"白鯧",    cat:"海鮮",  dishType:"整份",    unit:"尾",   convQty:6,   convUnit:"人/尾",aliases:["白鯧魚"], note:""},
+  {id:28, name:"青雞魚",  cat:"海鮮",  dishType:"整份",    unit:"尾",   convQty:6,   convUnit:"人/尾",aliases:[], note:""},
+  {id:29, name:"虱目魚",  cat:"海鮮",  dishType:"整份",    unit:"尾",   convQty:4,   convUnit:"人/尾",aliases:[], note:""},
+  {id:30, name:"鮭魚",    cat:"海鮮",  dishType:"個人份",  unit:"公克", convQty:120, convUnit:"g",  aliases:[], note:""},
+  {id:31, name:"香魚",    cat:"海鮮",  dishType:"整份",    unit:"尾",   convQty:2,   convUnit:"人/尾",aliases:[], note:""},
+  {id:32, name:"燕尾紅條",cat:"海鮮",  dishType:"整份",    unit:"尾",   convQty:6,   convUnit:"人/尾",aliases:[], note:""},
+  {id:33, name:"白蝦",    cat:"海鮮",  dishType:"個人份",  unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:"帶殼整尾"},
+  {id:34, name:"草蝦",    cat:"海鮮",  dishType:"個人份",  unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:"帶殼整尾"},
+  {id:37, name:"澎湖大蝦",cat:"海鮮",  dishType:"整份",    unit:"公克", convQty:120, convUnit:"g",  aliases:[], note:"特定產地"},
+  {id:35, name:"蝦仁",    cat:"海鮮",  dishType:"個人份",  unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:"去殼"},
+  {id:38, name:"櫻花蝦",  cat:"海鮮",  dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:"乾燥提味"},
+  {id:39, name:"柳葉魚",  cat:"海鮮",  dishType:"個人份",  unit:"公克", convQty:60,  convUnit:"g",  aliases:[], note:""},
+  {id:40, name:"花枝",    cat:"海鮮",  dishType:"個人份",  unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:""},
+  {id:41, name:"牡蠣",    cat:"海鮮",  dishType:"個人份",  unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:""},
+  {id:42, name:"干貝",    cat:"海鮮",  dishType:"固定配料",unit:"公克", convQty:50,  convUnit:"g",  aliases:[], note:""},
+  {id:43, name:"扇貝",    cat:"海鮮",  dishType:"整份",    unit:"個",   convQty:2,   convUnit:"人/個",aliases:[], note:""},
+  {id:44, name:"蛤蜊",    cat:"海鮮",  dishType:"固定配料",unit:"公克", convQty:200, convUnit:"g",  aliases:[], note:""},
+  {id:45, name:"烏魚子",  cat:"海鮮",  dishType:"整份",    unit:"副",   convQty:8,   convUnit:"人/副",aliases:[], note:""},
+  {id:46, name:"柴魚",    cat:"乾貨",  dishType:"固定配料",unit:"公克", convQty:20,  convUnit:"g",  aliases:[], note:"提湯底"},
+  {id:47, name:"高麗菜",  cat:"蔬菜",  dishType:"整份",    unit:"顆",   convQty:8,   convUnit:"人/顆",aliases:[], note:""},
+  {id:48, name:"大白菜",  cat:"蔬菜",  dishType:"整份",    unit:"顆",   convQty:8,   convUnit:"人/顆",aliases:[], note:""},
+  {id:49, name:"天津白菜",cat:"蔬菜",  dishType:"整份",    unit:"顆",   convQty:8,   convUnit:"人/顆",aliases:[], note:""},
+  {id:50, name:"娃娃菜",  cat:"蔬菜",  dishType:"整份",    unit:"顆",   convQty:4,   convUnit:"人/顆",aliases:[], note:""},
+  {id:51, name:"芥菜",    cat:"蔬菜",  dishType:"整份",    unit:"把",   convQty:8,   convUnit:"人/把",aliases:[], note:"長年菜"},
+  {id:52, name:"長芥菜",  cat:"蔬菜",  dishType:"整份",    unit:"把",   convQty:8,   convUnit:"人/把",aliases:[], note:"年節長年菜"},
+  {id:53, name:"菠菜",    cat:"蔬菜",  dishType:"整份",    unit:"把",   convQty:4,   convUnit:"人/把",aliases:[], note:""},
+  {id:54, name:"空心菜",  cat:"蔬菜",  dishType:"整份",    unit:"把",   convQty:4,   convUnit:"人/把",aliases:[], note:""},
+  {id:55, name:"蕃薯葉",  cat:"蔬菜",  dishType:"整份",    unit:"把",   convQty:4,   convUnit:"人/把",aliases:[], note:""},
+  {id:56, name:"A菜",     cat:"蔬菜",  dishType:"整份",    unit:"把",   convQty:4,   convUnit:"人/把",aliases:[], note:""},
+  {id:57, name:"大陸妹",  cat:"蔬菜",  dishType:"整份",    unit:"把",   convQty:4,   convUnit:"人/把",aliases:[], note:""},
+  {id:59, name:"萵苣",    cat:"蔬菜",  dishType:"整份",    unit:"顆",   convQty:8,   convUnit:"人/顆",aliases:[], note:""},
+  {id:60, name:"青花菜",  cat:"蔬菜",  dishType:"個人份",  unit:"公克", convQty:60,  convUnit:"g",  aliases:[], note:""},
+  {id:61, name:"芥蘭芽",  cat:"蔬菜",  dishType:"整份",    unit:"把",   convQty:4,   convUnit:"人/把",aliases:[], note:""},
+  {id:62, name:"茄子",    cat:"蔬菜",  dishType:"整份",    unit:"條",   convQty:2,   convUnit:"人/條",aliases:[], note:""},
+  {id:63, name:"苦瓜",    cat:"蔬菜",  dishType:"整份",    unit:"條",   convQty:4,   convUnit:"人/條",aliases:[], note:""},
+  {id:64, name:"白玉苦瓜",cat:"蔬菜",  dishType:"整份",    unit:"條",   convQty:4,   convUnit:"人/條",aliases:[], note:"品種不同，較甘甜"},
+  {id:65, name:"大黃瓜",  cat:"蔬菜",  dishType:"整份",    unit:"條",   convQty:4,   convUnit:"人/條",aliases:[], note:""},
+  {id:210,name:"小黃瓜",  cat:"蔬菜",  dishType:"固定配料",unit:"條",   convQty:2,   convUnit:"條",  aliases:["瓜仔哖"], note:"台語：瓜仔哖"},
+  {id:66, name:"節瓜",    cat:"蔬菜",  dishType:"整份",    unit:"條",   convQty:4,   convUnit:"人/條",aliases:[], note:""},
+  {id:67, name:"絲瓜",    cat:"蔬菜",  dishType:"整份",    unit:"條",   convQty:4,   convUnit:"人/條",aliases:[], note:""},
+  {id:68, name:"冬瓜",    cat:"蔬菜",  dishType:"整份",    unit:"斤",   convQty:6,   convUnit:"人/斤",aliases:[], note:""},
+  {id:69, name:"櫛瓜",    cat:"蔬菜",  dishType:"個人份",  unit:"公克", convQty:60,  convUnit:"g",  aliases:[], note:""},
+  {id:70, name:"竹筍",    cat:"蔬菜",  dishType:"整份",    unit:"支",   convQty:2,   convUnit:"人/支",aliases:[], note:""},
+  {id:71, name:"綠竹筍",  cat:"蔬菜",  dishType:"整份",    unit:"支",   convQty:2,   convUnit:"人/支",aliases:[], note:""},
+  {id:82, name:"白蘿蔔",  cat:"蔬菜",  dishType:"整份",    unit:"條",   convQty:4,   convUnit:"人/條",aliases:["白菜頭"], note:"台語：白菜頭"},
+  {id:83, name:"美濃菜頭",cat:"蔬菜",  dishType:"整份",    unit:"條",   convQty:4,   convUnit:"人/條",aliases:[], note:"白玉蘿蔔，不可與一般白蘿蔔互換"},
+  {id:79, name:"紅蘿蔔",  cat:"蔬菜",  dishType:"固定配料",unit:"條",   convQty:1,   convUnit:"條",  aliases:["胡蘿蔔","紅菜頭"], note:"台語：紅菜頭"},
+  {id:81, name:"馬鈴薯",  cat:"蔬菜",  dishType:"整份",    unit:"顆",   convQty:2,   convUnit:"人/顆",aliases:["洋芋"], note:""},
+  {id:78, name:"洋蔥",    cat:"蔬菜",  dishType:"固定配料",unit:"顆",   convQty:1,   convUnit:"顆",  aliases:[], note:"一般黃洋蔥"},
+  {id:211,name:"紫洋蔥",  cat:"蔬菜",  dishType:"固定配料",unit:"顆",   convQty:1,   convUnit:"顆",  aliases:[], note:"生食常用"},
+  {id:212,name:"牛奶洋蔥",cat:"蔬菜",  dishType:"固定配料",unit:"顆",   convQty:1,   convUnit:"顆",  aliases:[], note:"宜蘭特產"},
+  {id:73, name:"青椒",    cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:100, convUnit:"g",  aliases:["大同仔"], note:"台語：大同仔，不辣"},
+  {id:74, name:"紅椒",    cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:"彩椒，不辣"},
+  {id:75, name:"黃椒",    cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:"彩椒，不辣"},
+  {id:76, name:"甜椒",    cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:"彩椒泛稱"},
+  {id:77, name:"糯米椒",  cat:"蔬菜",  dishType:"整份",    unit:"包",   convQty:8,   convUnit:"人/包",aliases:["青龍椒"], note:"不辣，蔬菜角色"},
+  {id:84, name:"玉米筍",  cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:""},
+  {id:85, name:"甜豆",    cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:""},
+  {id:86, name:"豆莢",    cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:""},
+  {id:87, name:"抱子甘藍",cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:""},
+  {id:88, name:"黑橄欖",  cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:50,  convUnit:"g",  aliases:[], note:""},
+  {id:89, name:"木耳",    cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:80,  convUnit:"g",  aliases:["黑木耳","烏木耳","川耳"], note:""},
+  {id:93, name:"生菜",    cat:"蔬菜",  dishType:"整份",    unit:"顆",   convQty:4,   convUnit:"人/顆",aliases:[], note:""},
+  {id:94, name:"芹菜",    cat:"蔬菜",  dishType:"固定配料",unit:"把",   convQty:1,   convUnit:"把",  aliases:[], note:""},
+  {id:195,name:"鳳梨",    cat:"蔬菜",  dishType:"固定配料",unit:"顆",   convQty:1,   convUnit:"顆",  aliases:[], note:""},
+  {id:196,name:"梨子",    cat:"蔬菜",  dishType:"固定配料",unit:"顆",   convQty:1,   convUnit:"顆",  aliases:[], note:""},
+  {id:213,name:"花生",    cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:50,  convUnit:"g",  aliases:["土豆"], note:"台語：土豆"},
+  {id:115,name:"香菇",    cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:50,  convUnit:"g",  aliases:[], note:""},
+  {id:116,name:"冬菇",    cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:50,  convUnit:"g",  aliases:[], note:"乾香菇"},
+  {id:117,name:"秀珍菇",  cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:""},
+  {id:118,name:"杏鮑菇",  cat:"蔬菜",  dishType:"整份",    unit:"公克", convQty:60,  convUnit:"g",  aliases:[], note:""},
+  {id:119,name:"金針菇",  cat:"蔬菜",  dishType:"固定配料",unit:"包",   convQty:1,   convUnit:"包",  aliases:[], note:""},
+  {id:120,name:"白舞菇",  cat:"蔬菜",  dishType:"固定配料",unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:""},
+  {id:95, name:"蔥",      cat:"辛香料",dishType:"固定配料",unit:"把",   convQty:1,   convUnit:"把",  aliases:["蔥仔","蔥段"], note:"台語：蔥仔"},
+  {id:97, name:"蒜頭",    cat:"辛香料",dishType:"固定配料",unit:"顆",   convQty:1,   convUnit:"顆",  aliases:["大蒜","蒜片","蒜白"], note:"鱗莖"},
+  {id:101,name:"青蒜",    cat:"蔬菜",  dishType:"固定配料",unit:"把",   convQty:1,   convUnit:"把",  aliases:["蒜葉"], note:"蒜苗，不同於蒜頭"},
+  {id:103,name:"薑",      cat:"辛香料",dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:["薑片","薑絲","薑末"], note:""},
+  {id:105,name:"嫩薑",    cat:"辛香料",dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:"整塊上桌或醃漬"},
+  {id:106,name:"辣椒",    cat:"辛香料",dishType:"固定配料",unit:"條",   convQty:2,   convUnit:"條",  aliases:["番薑仔","紅辣椒"], note:"台語：番薑仔，辣"},
+  {id:108,name:"九層塔",  cat:"辛香料",dishType:"固定配料",unit:"把",   convQty:1,   convUnit:"把",  aliases:[], note:""},
+  {id:109,name:"香菜",    cat:"辛香料",dishType:"固定配料",unit:"把",   convQty:1,   convUnit:"把",  aliases:[], note:""},
+  {id:110,name:"枸杞",    cat:"辛香料",dishType:"固定配料",unit:"公克", convQty:10,  convUnit:"g",  aliases:[], note:""},
+  {id:111,name:"蓮子",    cat:"辛香料",dishType:"固定配料",unit:"公克", convQty:50,  convUnit:"g",  aliases:[], note:""},
+  {id:112,name:"竹笙",    cat:"辛香料",dishType:"固定配料",unit:"公克", convQty:20,  convUnit:"g",  aliases:[], note:"乾燥菌類"},
+  {id:113,name:"梅子",    cat:"辛香料",dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:""},
+  {id:114,name:"金針",    cat:"辛香料",dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:""},
+  {id:122,name:"蛋",      cat:"豆蛋",  dishType:"個人份",  unit:"顆",   convQty:1,   convUnit:"顆",  aliases:["雞蛋"], note:""},
+  {id:124,name:"皮蛋",    cat:"豆蛋",  dishType:"固定配料",unit:"顆",   convQty:2,   convUnit:"顆",  aliases:[], note:""},
+  {id:125,name:"嫩豆腐",  cat:"豆蛋",  dishType:"整份",    unit:"盒",   convQty:4,   convUnit:"人/盒",aliases:[], note:""},
+  {id:126,name:"豆腐",    cat:"豆蛋",  dishType:"整份",    unit:"塊",   convQty:4,   convUnit:"人/塊",aliases:[], note:""},
+  {id:127,name:"凍豆腐",  cat:"豆蛋",  dishType:"固定配料",unit:"公克", convQty:200, convUnit:"g",  aliases:[], note:""},
+  {id:128,name:"豆皮",    cat:"豆蛋",  dishType:"固定配料",unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:""},
+  {id:129,name:"豆包",    cat:"豆蛋",  dishType:"個人份",  unit:"片",   convQty:1,   convUnit:"片",  aliases:[], note:""},
+  {id:130,name:"豆腸",    cat:"豆蛋",  dishType:"固定配料",unit:"公克", convQty:150, convUnit:"g",  aliases:[], note:"素"},
+  {id:131,name:"豆輪",    cat:"豆蛋",  dishType:"固定配料",unit:"公克", convQty:150, convUnit:"g",  aliases:[], note:"素"},
+  {id:132,name:"麵腸",    cat:"豆蛋",  dishType:"固定配料",unit:"公克", convQty:150, convUnit:"g",  aliases:[], note:"素"},
+  {id:133,name:"豆豉",    cat:"豆蛋",  dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:"發酵黑豆"},
+  {id:134,name:"烤麩",    cat:"豆蛋",  dishType:"固定配料",unit:"公克", convQty:200, convUnit:"g",  aliases:[], note:"素"},
+  {id:135,name:"甜辣醬",  cat:"醬料",  dishType:"固定配料",unit:"毫升", convQty:100, convUnit:"ml", aliases:[], note:""},
+  {id:136,name:"沙拉醬",  cat:"醬料",  dishType:"固定配料",unit:"毫升", convQty:100, convUnit:"ml", aliases:["美乃滋"], note:""},
+  {id:138,name:"芥末醬",  cat:"醬料",  dishType:"固定配料",unit:"毫升", convQty:50,  convUnit:"ml", aliases:[], note:""},
+  {id:139,name:"辣椒醬",  cat:"醬料",  dishType:"固定配料",unit:"毫升", convQty:50,  convUnit:"ml", aliases:[], note:""},
+  {id:140,name:"番茄醬",  cat:"醬料",  dishType:"固定配料",unit:"毫升", convQty:80,  convUnit:"ml", aliases:[], note:""},
+  {id:142,name:"干貝醬",  cat:"醬料",  dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:""},
+  {id:143,name:"明太子醬",cat:"醬料",  dishType:"固定配料",unit:"公克", convQty:40,  convUnit:"g",  aliases:[], note:""},
+  {id:144,name:"味噌",    cat:"醬料",  dishType:"固定配料",unit:"公克", convQty:50,  convUnit:"g",  aliases:["味噌醬"], note:""},
+  {id:146,name:"沙嗲醬",  cat:"醬料",  dishType:"固定配料",unit:"毫升", convQty:60,  convUnit:"ml", aliases:[], note:""},
+  {id:147,name:"山賊醬",  cat:"醬料",  dishType:"固定配料",unit:"毫升", convQty:80,  convUnit:"ml", aliases:[], note:""},
+  {id:148,name:"破布子",  cat:"醬料",  dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:"樹子，醃漬"},
+  {id:149,name:"剝皮辣椒",cat:"醬料",  dishType:"固定配料",unit:"公克", convQty:50,  convUnit:"g",  aliases:["剝皮番薑"], note:"罐頭醃漬，台語：剝皮番薑"},
+  {id:150,name:"腐乳",    cat:"醬料",  dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:""},
+  {id:152,name:"蔭鳳梨",  cat:"醬料",  dishType:"固定配料",unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:"醃漬鳳梨"},
+  {id:153,name:"椒鹽粉",  cat:"醬料",  dishType:"固定配料",unit:"公克", convQty:10,  convUnit:"g",  aliases:[], note:""},
+  {id:154,name:"胡椒鹽",  cat:"醬料",  dishType:"固定配料",unit:"公克", convQty:10,  convUnit:"g",  aliases:[], note:""},
+  {id:155,name:"抹茶鹽",  cat:"醬料",  dishType:"固定配料",unit:"公克", convQty:10,  convUnit:"g",  aliases:[], note:""},
+  {id:156,name:"米酒",    cat:"醬料",  dishType:"固定配料",unit:"毫升", convQty:50,  convUnit:"ml", aliases:[], note:""},
+  {id:157,name:"上湯",    cat:"醬料",  dishType:"固定配料",unit:"毫升", convQty:200, convUnit:"ml", aliases:[], note:""},
+  {id:197,name:"蜂蜜",    cat:"醬料",  dishType:"固定配料",unit:"毫升", convQty:30,  convUnit:"ml", aliases:[], note:""},
+  {id:198,name:"啤酒",    cat:"醬料",  dishType:"固定配料",unit:"毫升", convQty:350, convUnit:"ml", aliases:[], note:""},
+  {id:72, name:"筍乾",    cat:"醬料",  dishType:"固定配料",unit:"公克", convQty:200, convUnit:"g",  aliases:[], note:"醃漬乾燥"},
+  {id:158,name:"白米",    cat:"穀糧",  dishType:"個人份",  unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:""},
+  {id:159,name:"白飯",    cat:"穀糧",  dishType:"個人份",  unit:"碗",   convQty:1,   convUnit:"碗",  aliases:[], note:""},
+  {id:160,name:"蕃薯粉",  cat:"穀糧",  dishType:"固定配料",unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:""},
+  {id:161,name:"牛奶",    cat:"乳製品",dishType:"固定配料",unit:"毫升", convQty:200, convUnit:"ml", aliases:[], note:""},
+  {id:162,name:"乳酪",    cat:"乳製品",dishType:"固定配料",unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:""},
+  {id:163,name:"乳酪絲",  cat:"乳製品",dishType:"固定配料",unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:""},
+  {id:164,name:"帕馬森",  cat:"乳製品",dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:""},
+  {id:165,name:"奶油",    cat:"乳製品",dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:""},
+  {id:214,name:"蝦米",    cat:"乾貨",  dishType:"固定配料",unit:"公克", convQty:20,  convUnit:"g",  aliases:[], note:"乾燥提味"},
+  {id:215,name:"干貝絲",  cat:"乾貨",  dishType:"固定配料",unit:"公克", convQty:20,  convUnit:"g",  aliases:[], note:""},
+  {id:216,name:"金華火腿",cat:"乾貨",  dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:"提鮮湯底"},
+  {id:217,name:"魚乾",    cat:"乾貨",  dishType:"固定配料",unit:"公克", convQty:30,  convUnit:"g",  aliases:[], note:""},
+  {id:188,name:"昆布",    cat:"乾貨",  dishType:"固定配料",unit:"公克", convQty:20,  convUnit:"g",  aliases:[], note:"湯底用"},
+  {id:218,name:"大骨高湯",cat:"湯底",  dishType:"固定配料",unit:"毫升", convQty:500, convUnit:"ml", aliases:[], note:""},
+  {id:219,name:"柴魚昆布湯",cat:"湯底",dishType:"固定配料",unit:"毫升", convQty:500, convUnit:"ml", aliases:[], note:"日式出汁"},
+  {id:220,name:"雞骨高湯",cat:"湯底",  dishType:"固定配料",unit:"毫升", convQty:500, convUnit:"ml", aliases:[], note:""},
+  {id:221,name:"蔬菜高湯",cat:"湯底",  dishType:"固定配料",unit:"毫升", convQty:500, convUnit:"ml", aliases:[], note:"素"},
+  {id:166,name:"香腸",    cat:"現成品",dishType:"個人份",  unit:"條",   convQty:1,   convUnit:"條",  aliases:["台酒香腸","宜蘭香腸"], note:""},
+  {id:169,name:"肉捲",    cat:"現成品",dishType:"個人份",  unit:"條",   convQty:1,   convUnit:"條",  aliases:["肉卷"], note:""},
+  {id:171,name:"阿富肉捲",cat:"現成品",dishType:"整份",    unit:"條",   convQty:4,   convUnit:"人/條",aliases:[], note:"嘉義名產"},
+  {id:172,name:"雞捲",    cat:"現成品",dishType:"整份",    unit:"條",   convQty:4,   convUnit:"人/條",aliases:[], note:""},
+  {id:173,name:"豆皮捲",  cat:"現成品",dishType:"個人份",  unit:"條",   convQty:1,   convUnit:"條",  aliases:[], note:"素"},
+  {id:36, name:"蝦排",    cat:"現成品",dishType:"個人份",  unit:"片",   convQty:1,   convUnit:"片",  aliases:[], note:"裹粉加工品"},
+  {id:222,name:"蝦捲",    cat:"現成品",dishType:"個人份",  unit:"條",   convQty:1,   convUnit:"條",  aliases:[], note:""},
+  {id:223,name:"魚柳",    cat:"現成品",dishType:"個人份",  unit:"條",   convQty:2,   convUnit:"條",  aliases:["魚條","炸魚條"], note:"裹粉炸製"},
+  {id:224,name:"天婦羅",  cat:"現成品",dishType:"固定配料",unit:"片",   convQty:2,   convUnit:"片",  aliases:[], note:"關東煮食材"},
+  {id:225,name:"甜不辣",  cat:"現成品",dishType:"固定配料",unit:"片",   convQty:2,   convUnit:"片",  aliases:[], note:""},
+  {id:226,name:"肉羹",    cat:"現成品",dishType:"固定配料",unit:"公克", convQty:80,  convUnit:"g",  aliases:[], note:""},
+  {id:174,name:"貢丸",    cat:"現成品",dishType:"固定配料",unit:"公克", convQty:100, convUnit:"g",  aliases:["丸子"], note:""},
+  {id:176,name:"佛跳牆",  cat:"現成品",dishType:"整份",    unit:"罐",   convQty:8,   convUnit:"人/罐",aliases:[], note:""},
+  {id:177,name:"菜頭粿",  cat:"現成品",dishType:"整份",    unit:"份",   convQty:1,   convUnit:"份",  aliases:[], note:""},
+  {id:178,name:"北部粽",  cat:"現成品",dishType:"個人份",  unit:"個",   convQty:1,   convUnit:"個",  aliases:[], note:""},
+  {id:179,name:"宜蘭粽",  cat:"現成品",dishType:"個人份",  unit:"個",   convQty:1,   convUnit:"個",  aliases:[], note:""},
+  {id:180,name:"彰化粽",  cat:"現成品",dishType:"個人份",  unit:"個",   convQty:1,   convUnit:"個",  aliases:[], note:""},
+  {id:181,name:"粿粽",    cat:"現成品",dishType:"個人份",  unit:"個",   convQty:1,   convUnit:"個",  aliases:[], note:""},
+  {id:182,name:"鹼粽",    cat:"現成品",dishType:"個人份",  unit:"個",   convQty:1,   convUnit:"個",  aliases:[], note:""},
+  {id:183,name:"素鱈魚",  cat:"現成品",dishType:"個人份",  unit:"片",   convQty:1,   convUnit:"片",  aliases:[], note:"素"},
+  {id:184,name:"五更腸旺",cat:"現成品",dishType:"整份",    unit:"份",   convQty:8,   convUnit:"人/份",aliases:[], note:""},
+  {id:185,name:"紹興吉捲",cat:"現成品",dishType:"整份",    unit:"份",   convQty:8,   convUnit:"人/份",aliases:[], note:""},
+  {id:186,name:"韓式泡菜",cat:"現成品",dishType:"固定配料",unit:"公克", convQty:150, convUnit:"g",  aliases:[], note:""},
+  {id:187,name:"酸菜",    cat:"現成品",dishType:"固定配料",unit:"公克", convQty:100, convUnit:"g",  aliases:[], note:""},
+  {id:199,name:"紅糟肉",  cat:"現成品",dishType:"個人份",  unit:"公克", convQty:120, convUnit:"g",  aliases:[], note:""},
+  {id:192,name:"芋仔糋",  cat:"現成品",dishType:"個人份",  unit:"個",   convQty:2,   convUnit:"個",  aliases:[], note:"台語：炸芋頭"},
+  {id:193,name:"菜丸仔糋",cat:"現成品",dishType:"個人份",  unit:"個",   convQty:2,   convUnit:"個",  aliases:[], note:"台語：炸蔬菜丸"},
+  {id:201,name:"餅乾",    cat:"現成品",dishType:"固定配料",unit:"包",   convQty:1,   convUnit:"包",  aliases:[], note:""},
+  {id:202,name:"蛋黃酥",  cat:"現成品",dishType:"個人份",  unit:"個",   convQty:1,   convUnit:"個",  aliases:[], note:""},
+  {id:189,name:"腰果",    cat:"",      dishType:"",        unit:"",     convQty:null,convUnit:"",   aliases:[], note:"待分類"},
+];
+let dbNextId = 230;
+
+// 查詢食材（支援別名）
+function lookupIngredient(name) {
+  const n = name.trim();
+  return db.find(r =>
+    r.name === n ||
+    (r.aliases && r.aliases.includes(n))
+  ) || null;
+}
+
+// ════════════════════════════════════════════════
+// 菜單資料
+// ════════════════════════════════════════════════
+const menuData = {
+  "除夕 2026": { date:"2026.02.16 MON.", dishes:[
+    {name:"滷豬肉",ingredients:["二層肉"],note:""},
+    {name:"清蒸海石斑",ingredients:["海石斑","嫩豆腐"],note:""},
+    {name:"竹笙蓮子干貝雞湯",ingredients:["烏骨雞","竹笙","干貝","蓮子"],note:""},
+    {name:"青椒炒豬肝",ingredients:["豬肝","青椒","蒜頭"],note:""},
+    {name:"蕃薯葉",ingredients:["菠菜","薑絲","豆豉","香菇"],note:""},
+    {name:"炸魚柳",ingredients:["蝦仁","腰果","青椒","紅椒","黃椒"],note:""},
+    {name:"上湯蝦仁長年菜",ingredients:["長芥菜","蝦仁","上湯"],note:""},
+    {name:"素炸鱈排",ingredients:["素鱈魚"],note:"素"},
+    {name:"焗烤白菜",ingredients:["天津白菜","乳酪絲","帕馬森","牛奶"],note:""},
+    {name:"家傳兜錢菜",ingredients:["蕃薯粉","紅菜頭","蒜葉","櫻花蝦"],note:""},
+    {name:"御白飯",ingredients:[],note:""},
+    {name:"菜頭粿",ingredients:["菜頭粿"],note:""},
+  ], dizhu:["雞腿排","溫泉蛋","清炒蔬食","青菜","白飯","茶水"]},
+  "初二 2026": { date:"2026.02.18 WED.", dishes:[
+    {name:"烏參佛跳牆",ingredients:["佛跳牆"],note:""},
+    {name:"粉肝",ingredients:["粉肝","蒜白"],note:""},
+    {name:"燒烤梅花肉片",ingredients:["梅花肉片","洋蔥","蔥段"],note:""},
+    {name:"炸雞佐生菜",ingredients:["雞腿肉","生菜"],note:""},
+    {name:"烤香魚",ingredients:["香魚","抹茶鹽"],note:""},
+    {name:"胡蘿蔔烘蛋",ingredients:["雞蛋","紅蘿蔔","甜豆","抱子甘藍","黑橄欖"],note:""},
+    {name:"扇貝燴芥菜櫻花蝦",ingredients:["扇貝","芥菜","櫻花蝦"],note:""},
+    {name:"菇菇蝦肉丸清湯",ingredients:["冬菇","丸子"],note:""},
+    {name:"御白飯",ingredients:["白飯"],note:""},
+  ], dizhu:null},
+  "清明 2026": { date:"2026.04.19 SUN.", dishes:[
+    {name:"家常滷肉",ingredients:["豬肉","蔥","薑","蒜頭"],note:""},
+    {name:"蒸魚",ingredients:["石斑","蔥","紅辣椒","豆豉","薑絲"],note:""},
+    {name:"甘蔗雞",ingredients:["甘蔗雞","椒鹽粉"],note:""},
+    {name:"醬燒肋排",ingredients:["肋排","娃娃菜"],note:""},
+    {name:"清燙白蝦",ingredients:["白蝦","芥末醬"],note:""},
+    {name:"香菇黃瓜清湯",ingredients:["大黃瓜","香菇","剝皮辣椒","昆布"],note:""},
+    {name:"苦瓜皮蛋",ingredients:["苦瓜","皮蛋","味噌醬","豆腐","胡蘿蔔"],note:""},
+    {name:"綜合蔬菜溫沙拉",ingredients:["高麗菜","節瓜","甜豆","木耳","甜椒"],note:"素"},
+    {name:"涼筍",ingredients:["竹筍","沙拉醬"],note:""},
+    {name:"素豆皮捲",ingredients:["豆皮捲","辣椒醬"],note:"素"},
+    {name:"白飯",ingredients:["白米"],note:""},
+  ], dizhu:["雞腿","水煮蛋","青菜","草仔粿","白飯","茶水"]},
+  "端午 2025-1": { date:"2025.06.19 FRI.", dishes:[
+    {name:"家常炕肉",ingredients:["五花肉","啤酒","薑"],note:""},
+    {name:"鮮蒸青雞",ingredients:["青雞魚"],note:""},
+    {name:"蝦仁烘蛋",ingredients:["蝦仁","蛋"],note:""},
+    {name:"剝椒雞香腸",ingredients:["台酒香腸","蒜頭"],note:""},
+    {name:"上湯娃娃菜",ingredients:["娃娃菜","紅菜頭","冬菇","金針菇"],note:""},
+    {name:"溫泉空心菜",ingredients:["空心菜","蒜頭"],note:"素"},
+    {name:"宜蘭粉肝",ingredients:["粉肝"],note:""},
+    {name:"糯椒皮蛋",ingredients:["糯米椒","皮蛋","剝皮辣椒","紅辣椒","柴魚"],note:""},
+    {name:"涼筍",ingredients:["綠竹筍"],note:""},
+    {name:"冬瓜排骨湯",ingredients:["冬瓜","排骨","竹笙"],note:""},
+    {name:"白飯",ingredients:["白米"],note:""},
+    {name:"粽子、粿粽",ingredients:["北部粽","宜蘭粽","粿粽"],note:""},
+  ], dizhu:["滷肉","滷蛋","空心菜","肉粽","白飯","茶水"]},
+  "重陽 2025": { date:"2025.10.29 WED.", dishes:[
+    {name:"炸豬排",ingredients:["豬排"],note:""},
+    {name:"鹿茸烏骨雞湯",ingredients:["烏骨雞"],note:""},
+    {name:"乾煎虱目魚肚",ingredients:["虱目魚","米酒","蔥"],note:""},
+    {name:"草蝦",ingredients:["草蝦","蒜頭"],note:""},
+    {name:"青龍皮蛋",ingredients:["糯米椒","皮蛋"],note:""},
+    {name:"香菇炒青菜",ingredients:["萵苣","香菇"],note:"素"},
+    {name:"干貝醬炒高麗菜",ingredients:["高麗菜","干貝醬","黑木耳"],note:""},
+    {name:"沙拉涼筍",ingredients:["綠竹筍","美乃滋"],note:""},
+    {name:"香煎素餘",ingredients:["素鱈魚"],note:"素"},
+    {name:"素紅燒湯",ingredients:["紅燒湯"],note:"素"},
+    {name:"白飯",ingredients:[],note:""},
+  ], dizhu:["雞腿","青菜","高麗菜","茶葉蛋","白飯","茶水"]},
+  "中元 2025": { date:"2025.09.06 SAT.", dishes:[
+    {name:"紅燒肉",ingredients:["五花肉","薑","蔥","蒜頭"],note:""},
+    {name:"雞腿排",ingredients:["雞腿肉","洋釀醬"],note:""},
+    {name:"鮮蒸石斑",ingredients:["石斑魚","醬汁","薑"],note:""},
+    {name:"清燙白蝦",ingredients:["白蝦","芥末"],note:""},
+    {name:"炸物",ingredients:["雞捲","甜辣醬"],note:""},
+    {name:"青椒炒豬肝",ingredients:["豬肝","青椒","紅椒","蒜頭"],note:""},
+    {name:"涼筍",ingredients:["綠竹筍","沙拉醬"],note:""},
+    {name:"炒A菜",ingredients:["A菜","香菇"],note:"素"},
+    {name:"酸菜素腸",ingredients:["豆腸","酸菜","辣椒","薑"],note:"素"},
+    {name:"冬瓜蓮子排骨湯",ingredients:["排骨","冬瓜","蓮子","秀珍菇"],note:""},
+    {name:"白飯",ingredients:["白米"],note:""},
+    {name:"鹼粽",ingredients:["鹼粽","蜂蜜"],note:""},
+  ], dizhu:["雞腿","水煮蛋","青菜","鹼粽","白飯","茶水"]},
+  "端午 2025": { date:"2025.05.31 SAT.", dishes:[
+    {name:"梅干菜燒肉",ingredients:["五花肉","梅干菜","蔥","辣椒","薑"],note:""},
+    {name:"樹子蒸白鯧",ingredients:["白鯧","破布子","薑","蒜頭"],note:""},
+    {name:"蝦仁烘蛋",ingredients:["蝦仁","蛋","蔥","紅菜頭"],note:""},
+    {name:"原味香腸",ingredients:["香腸","蒜頭","甜辣醬"],note:""},
+    {name:"炸肉捲",ingredients:["肉捲","甜辣醬","小黃瓜"],note:""},
+    {name:"涼拌茄子",ingredients:["茄子"],note:"素"},
+    {name:"炒青菜",ingredients:["大陸妹","香菇"],note:"素"},
+    {name:"涼筍",ingredients:["綠竹筍","沙拉醬"],note:""},
+    {name:"蜜汁豆包",ingredients:["豆包","青椒","紅椒","紅菜頭","番茄醬"],note:"素"},
+    {name:"鳳梨苦瓜雞湯",ingredients:["雞腿肉","苦瓜","蔭鳳梨","鳳梨","梅子"],note:""},
+    {name:"白飯",ingredients:["白米"],note:""},
+    {name:"肉粽",ingredients:["北部粽","彰化粽"],note:""},
+  ], dizhu:["梅干燒肉","煎蛋","青菜","香腸","白飯","茶水"]},
+  "清明 2025": { date:"2025.03.31 MON.", dishes:[
+    {name:"三層肉",ingredients:["三層肉條","蔥","嫩薑","蒜頭","米酒"],note:""},
+    {name:"蒜烤鱸魚",ingredients:["金目鱸魚","洋蔥","紅椒","青椒"],note:""},
+    {name:"蝦仁烘蛋",ingredients:["蛋","蝦仁","干貝醬","明太子醬"],note:""},
+    {name:"雞柳山賊燒",ingredients:["雞里肌肉","山賊醬"],note:""},
+    {name:"烤香腸",ingredients:["香腸","大蒜"],note:""},
+    {name:"炸肉卷",ingredients:["肉捲","甜辣醬"],note:""},
+    {name:"水炒蕃薯葉",ingredients:["蕃薯葉","嫩薑"],note:"素"},
+    {name:"三杯紫茄",ingredients:["茄子","辣椒"],note:"素"},
+    {name:"芹香豆絲",ingredients:["豆皮","芹菜","紅菜頭","菇"],note:"素"},
+    {name:"菜頭丸子清湯",ingredients:["白蘿蔔","貢丸","蔥"],note:""},
+    {name:"白飯",ingredients:["白米"],note:""},
+  ], dizhu:["雞柳山賊燒","水煮蛋","香脆筍","烤香腸","白飯","茶水"]},
+  "初二 2025": { date:"2025.01.30 THU.", dishes:[
+    {name:"醬燒大腸",ingredients:["大腸","醬","青椒"],note:""},
+    {name:"烏魚子、香腸、燒肉",ingredients:["烏魚子","梨子","蛋"],note:""},
+    {name:"燙青菜",ingredients:["A菜"],note:"素"},
+    {name:"蒜炒鹹豬肉",ingredients:["鹹豬肉","青蒜","豆莢"],note:""},
+    {name:"綜合海鮮",ingredients:["鮭魚","澎湖大蝦","花枝","牡蠣","柳葉魚"],note:""},
+    {name:"鐵板蔬菜",ingredients:["櫛瓜","紅菜頭","玉米筍","香菇","青花菜"],note:"素"},
+    {name:"焗烤娃娃菜",ingredients:["娃娃菜","乳酪","紅菜頭","乳酪絲"],note:""},
+    {name:"佛跳牆",ingredients:["佛跳牆"],note:""},
+    {name:"蔬菜清湯",ingredients:["凍豆腐","貢丸","香菇","白菜頭"],note:""},
+    {name:"御白飯",ingredients:["白飯"],note:""},
+    {name:"菜頭粿",ingredients:["菜頭粿","醬"],note:""},
+  ], dizhu:null},
+  "除夕 2025": { date:"2025.01.28 TUE.", dishes:[
+    {name:"小菜三品",ingredients:["韓式泡菜","美濃菜頭","烏魚子"],note:""},
+    {name:"酥炸紅燒肉",ingredients:["紅糟肉","蒜白"],note:""},
+    {name:"鮮蒸石斑",ingredients:["龍虎石斑","薑絲","醬汁"],note:""},
+    {name:"蔗香土雞",ingredients:["土雞","胡椒鹽"],note:""},
+    {name:"手工香腸",ingredients:["宜蘭香腸","蒜白"],note:""},
+    {name:"清炒時蔬",ingredients:["芥蘭芽","香菇","秀珍菇","紅菜頭"],note:"素"},
+    {name:"青龍皮蛋",ingredients:["糯米椒","皮蛋","紅辣椒","紅菜頭"],note:""},
+    {name:"素蒲燒鰻",ingredients:["茄子","豆皮","青花菜"],note:"素"},
+    {name:"排骨湯",ingredients:["豬小排","蛤蜊","芥菜","薑","蒜片"],note:""},
+    {name:"家傳兜錢菜",ingredients:["蕃薯粉","臘肉","蒜葉","紅菜頭","香菇","干貝醬"],note:""},
+    {name:"御白飯",ingredients:[],note:""},
+  ], dizhu:["雞腿","水煮蛋","清炒蔬食","青菜","白飯","茶水"]},
+  "重陽 2024": { date:"2024.10.11 FRI.", dishes:[
+    {name:"信州味噌燒肉",ingredients:["三層肉","味噌"],note:""},
+    {name:"甘蔗燻雞",ingredients:["甘蔗雞","胡椒鹽"],note:""},
+    {name:"沙嗲蝦",ingredients:["白蝦","沙嗲醬","蔥仔","蒜頭"],note:""},
+    {name:"阿富肉捲",ingredients:["阿富肉捲","瓜仔哖"],note:""},
+    {name:"白胡椒排骨湯",ingredients:["箅仔骨","蒜頭"],note:""},
+    {name:"五更豆腐腸旺",ingredients:["五更腸旺","豆腐","蔥仔"],note:""},
+    {name:"三絲烘蛋",ingredients:["蛋","紅菜頭","大同仔","剝皮番薑"],note:""},
+    {name:"綜合素炸物",ingredients:["芋仔糋","菜丸仔糋"],note:"素"},
+    {name:"醬燒豆輪",ingredients:["豆輪","紅菜頭","杏鮑菇","香菇"],note:"素"},
+    {name:"燙地瓜葉",ingredients:["蕃薯葉"],note:"素"},
+    {name:"素炒高麗菜",ingredients:["高麗菜","烏木耳","紅菜頭"],note:"素"},
+    {name:"白飯",ingredients:["白米"],note:""},
+  ], dizhu:["雞腿排","水煮蛋","燙青菜","椒鹽杏鮑菇","炒高麗菜","白飯","茶水"]},
+  "中元 2024": { date:"2024.08.18 SUN.", dishes:[
+    {name:"筍乾燉肉",ingredients:["三層肉","筍乾","蒜頭","米酒"],note:""},
+    {name:"蒜香煎鮭魚",ingredients:["鮭魚","蒜頭","奶油"],note:""},
+    {name:"藍鑽蝦排",ingredients:["蝦排","甜辣醬"],note:""},
+    {name:"嘉義大肉捲",ingredients:["阿富肉捲","甜辣醬","小黃瓜"],note:""},
+    {name:"清蒸紫茄",ingredients:["茄子","薑","蒜頭","香菜","辣椒"],note:""},
+    {name:"菜瓜煎",ingredients:["絲瓜","香菇","白舞菇","破布子"],note:"素"},
+    {name:"炒空心菜",ingredients:["空心菜","薑"],note:"素"},
+    {name:"紅燒烤麩",ingredients:["烤麩","紅蘿蔔","香菇","黑木耳","筍片","毛豆仁"],note:"素"},
+    {name:"紹興吉捲",ingredients:["紹興吉捲"],note:""},
+    {name:"金華干貝燉雞",ingredients:["金華雞湯"],note:""},
+    {name:"白飯",ingredients:["白米"],note:""},
+    {name:"鹼粽",ingredients:["鹼粽","砂糖"],note:""},
+  ], dizhu:["雞腿","水煮蛋","青菜","鹼粽","餅乾","白飯","茶水"]},
+  "端午 2024": { date:"2024.06.10", dishes:[
+    {name:"回鍋肉",ingredients:["三層肉條","蔥","薑","蒜頭","米酒"],note:""},
+    {name:"醉雞腿",ingredients:["醉雞腿","蔥","薑"],note:""},
+    {name:"清蒸紅條",ingredients:["燕尾紅條","薑"],note:""},
+    {name:"炒豬肝",ingredients:["豬肝","蔥","洋蔥"],note:""},
+    {name:"炸八寶捲",ingredients:["澎湖八寶捲","甜辣醬","小黃瓜"],note:""},
+    {name:"川耳醋溜",ingredients:["川耳","薑","枸杞"],note:"素"},
+    {name:"清炒菠菜",ingredients:["菠菜","香菇"],note:"素"},
+    {name:"蔭豉燜苦瓜",ingredients:["白玉苦瓜","紅辣椒"],note:"素"},
+    {name:"素什錦燴黑醋",ingredients:["紅菜頭","茄子","玉米筍","素鴨肉"],note:"素"},
+    {name:"筍片排骨湯",ingredients:["豬小排","竹筍","蒜頭"],note:""},
+    {name:"白飯",ingredients:["白米"],note:""},
+    {name:"肉粽",ingredients:["南部粽"],note:""},
+  ], dizhu:["雞腿","魯蛋","青菜","肉粽","白飯","茶水"]},
+  "除夕 2024": { date:"2024.02.09 FRI.", dishes:[
+    {name:"烤香腸",ingredients:[],note:""},
+    {name:"煙燻花枝",ingredients:[],note:""},
+    {name:"腐皮卷",ingredients:[],note:""},
+    {name:"醋溜木耳",ingredients:[],note:"素"},
+    {name:"手工花生豆腐",ingredients:[],note:"素"},
+    {name:"甘蔗燻雞",ingredients:[],note:""},
+    {name:"清蒸石斑",ingredients:[],note:""},
+    {name:"紅槽肉佐青花",ingredients:[],note:""},
+    {name:"香菇剁椒炒豆苗",ingredients:[],note:"素"},
+    {name:"芥菜蛤蠣排骨湯",ingredients:[],note:""},
+    {name:"家傳兜錢菜",ingredients:[],note:""},
+    {name:"御白飯",ingredients:["白米"],note:""},
+  ], dizhu:["雞腿","魯蛋","青菜","青蔬","白飯","茶水"]},
+};
+
+// 份量記憶：{ menuKey: { dishIdx: { ingName: { qty, unit } } } }
+let qtyMemory = {};
+
+// ════════════════════════════════════════════════
+// 菜單規劃：導覽
+// ════════════════════════════════════════════════
+let currentMenu = null;
+
+function buildNav() {
+  const groups = {};
+  Object.keys(menuData).forEach(key => {
+    const parts = key.split(' ');
+    const yr = parts[parts.length-1].replace(/-\d+$/,'');
+    const fest = parts.slice(0,-1).join(' ');
+    if (!groups[yr]) groups[yr]=[];
+    groups[yr].push({key, fest});
+  });
+  const nav = document.getElementById('navList');
+  nav.innerHTML = '';
+  Object.keys(groups).sort((a,b)=>b-a).forEach(yr => {
+    const div = document.createElement('div');
+    div.className = 'yr-group';
+    div.innerHTML = `<div class="yr-label">${yr}</div>`;
+    groups[yr].forEach(({key, fest}) => {
+      const btn = document.createElement('button');
+      btn.className = 'nav-btn';
+      btn.id = 'nb-'+key;
+      btn.innerHTML = `${fest}<span class="d-small">${menuData[key].date}</span>`;
+      btn.onclick = () => showMenu(key);
+      div.appendChild(btn);
+    });
+    nav.appendChild(div);
+  });
+}
+
+function showMenu(key) {
+  currentMenu = key;
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const nb = document.getElementById('nb-'+key);
+  if (nb) { nb.classList.add('active'); nb.scrollIntoView({block:'nearest'}); }
+  if (!qtyMemory[key]) qtyMemory[key] = {};
+  renderMenuContent();
+  document.getElementById('printBtn').style.display = '';
+  document.getElementById('shopBtn').style.display = '';
+}
+
+function renderMenuContent() {
+  if (!currentMenu) return;
+  const menu = menuData[currentMenu];
+  const p = getPersons();
+  const parts = currentMenu.split(' ');
+  const yr = parts[parts.length-1].replace(/-\d+$/,'');
+  const fest = parts.slice(0,-1).join(' ');
+
+  let dishesHTML = menu.dishes.map((dish,i) => renderDishRow(currentMenu,i,dish,p)).join('');
+
+  let dizhuHTML = '';
+  if (menu.dizhu) {
+    dizhuHTML = `<div class="dizhu-box">
+      <div class="dizhu-hdr">供桌　地基主</div>
+      <div class="dizhu-body">
+        ${menu.dizhu.map((item,i)=>`<div class="dizhu-item"><span class="dizhu-n">${i+1}</span><span>${item}</span></div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('menuMain').innerHTML = `
+    <div class="menu-hdr">
+      <div class="menu-hdr-title">${currentMenu}</div>
+      <div class="menu-hdr-meta">${menu.date}</div>
+      <div class="menu-hdr-actions">
+        <button class="btn-nav" style="color:#6f6539;border-color:#c9a84c" onclick="openPrint()">列印菜單 ▤</button>
+        <button class="btn-nav" style="color:#6f6539;border-color:#c9a84c" onclick="toggleShopping()">採購清單 ▸</button>
+      </div>
+    </div>
+    <div class="sec-label">桌菜　MAIN TABLE</div>
+    <div id="dishList">${dishesHTML}</div>
+    <button class="add-dish-btn" onclick="toggleNewDishForm()">＋ 新增菜色</button>
+    <div class="new-dish-form" id="newDishForm">
+      <div class="nd-row"><label>菜名</label><input id="nd-name" placeholder="例：清蒸石斑"></div>
+      <div class="nd-row"><label>食材（逗號隔開）</label><input id="nd-ingr" placeholder="例：石斑,薑,蔥"></div>
+      <div class="nd-row"><label>備註</label><input id="nd-note" placeholder="素 / 冷盤…"></div>
+      <div class="nd-actions">
+        <button class="btn-add-dish" onclick="commitNewDish()">加入菜單</button>
+        <button class="btn-cancel-dish" onclick="toggleNewDishForm()">取消</button>
+      </div>
+    </div>
+    ${dizhuHTML}
+  `;
+  updateShoppingPanel();
+}
+
+function renderDishRow(key, idx, dish, persons) {
+  const noteHTML = dish.note ? `<span class="note-badge">${dish.note}</span> ` : '';
+  const ingrHTML = dish.ingredients.length
+    ? dish.ingredients.map(ing => {
+        const dbRec = lookupIngredient(ing);
+        const linked = dbRec ? ' linked' : '';
+        return `<span class="ing-tag${linked}" onclick="toggleQty('${key}',${idx},'${ing}')">${ing}</span>`;
+      }).join('')
+    : '<span style="font-size:0.72rem;color:#ccc">尚未填寫食材</span>';
+
+  // qty panel
+  const qd = (qtyMemory[key]||{})[idx]||{};
+  const qtyRowsHTML = dish.ingredients.map(ing => {
+    const dbRec = lookupIngredient(ing);
+    const saved = qd[ing];
+    const dt = dbRec?.dishType||'';
+    const cu = dbRec?.convUnit||'';
+    const pu = dbRec?.unit||'';
+
+    let inputHTML = '', resultHTML = '', typeBadge = '';
+    if (dt) typeBadge = `<span class="qty-type-badge qt-${dt}">${dt}</span>`;
+
+    if (dt === '整份') {
+      const perDish = saved?.qty ?? dbRec.convQty ?? '';
+      const need = perDish ? Math.ceil(persons/perDish) : '—';
+      const needStr = perDish ? `需 <b>${need}</b>${pu}` : '—';
+      inputHTML = `<input class="qty-input" type="number" min="1" step="1"
+        value="${perDish}" placeholder="幾人/份"
+        onchange="saveQty('${key}',${idx},'${ing}',this.value,'${pu}')">
+        <span class="qty-unit-lbl">人/1${pu}</span>`;
+      resultHTML = `<span class="qty-result" id="qr-${key}-${idx}-${encodeIng(ing)}">${needStr}</span>`;
+    } else if (dt === '固定配料') {
+      const fixQty = saved?.qty ?? dbRec.convQty ?? '';
+      inputHTML = `<input class="qty-input" type="number" min="0" step="1"
+        value="${fixQty}" placeholder="固定量"
+        onchange="saveQty('${key}',${idx},'${ing}',this.value,'${cu}')">
+        <span class="qty-unit-lbl">${cu}</span>`;
+      resultHTML = `<span class="qty-result" id="qr-${key}-${idx}-${encodeIng(ing)}">固定</span>`;
+    } else {
+      // 個人份 or 未連結
+      const perPerson = saved?.qty ?? (dbRec?.convQty ?? '');
+      const unit = saved?.unit || cu || 'g';
+      const total = perPerson ? perPerson*persons : '—';
+      const totalStr = perPerson ? `需 <b>${total}</b>${unit}` : '—';
+      inputHTML = `<input class="qty-input" type="number" min="0" step="5"
+        value="${perPerson}" placeholder="每人"
+        onchange="saveQty('${key}',${idx},'${ing}',this.value,'${unit}')">
+        <span class="qty-unit-lbl">${unit}/人</span>`;
+      resultHTML = `<span class="qty-result" id="qr-${key}-${idx}-${encodeIng(ing)}">${totalStr}</span>`;
+    }
+
+    return `<div class="qty-row-item">
+      <label>${ing}${typeBadge}</label>
+      ${inputHTML}${resultHTML}
+    </div>`;
+  }).join('');
+
+  const hasIngr = dish.ingredients.length > 0;
+  return `<div class="dish-row" id="dr-${key}-${idx}">
+    <span class="dish-num">${idx+1}</span>
+    <div class="dish-body">
+      <div class="dish-name">${noteHTML}${dish.name}</div>
+      <div class="dish-tags">${ingrHTML}</div>
+      ${hasIngr ? `<div class="qty-panel" id="qp-${key}-${idx}">
+        <div class="qty-panel-hdr">食材份量　×${persons} 人　（藍色標籤已連結食材資料庫）</div>
+        ${qtyRowsHTML}
+      </div>` : ''}
+    </div>
+  </div>`;
+}
+
+function encodeIng(s) { return s.replace(/[^\w\u4e00-\u9fa5]/g,'_'); }
+
+function toggleQty(key, idx, ing) {
+  const panel = document.getElementById(`qp-${key}-${idx}`);
+  if (panel) panel.classList.toggle('open');
+}
+
+function saveQty(key, idx, ing, val, unit) {
+  if (!qtyMemory[key]) qtyMemory[key]={};
+  if (!qtyMemory[key][idx]) qtyMemory[key][idx]={};
+  qtyMemory[key][idx][ing] = {qty: parseFloat(val)||0, unit};
+  updateShoppingPanel();
+}
+
+document.getElementById('personsInput').addEventListener('input', () => {
+  if (currentMenu) renderMenuContent();
+});
+
+// New session
+function toggleNewSessionForm() {
+  document.getElementById('newSessionForm').classList.toggle('show');
+  document.getElementById('ns-err').style.display='none';
+}
+document.addEventListener('change', e => {
+  if (e.target.id==='ns-festival') {
+    document.getElementById('ns-custom-row').style.display = e.target.value==='__custom__'?'block':'none';
+  }
+});
+function addNewSession() {
+  const fv = document.getElementById('ns-festival').value;
+  const cn = document.getElementById('ns-custom-name').value.trim();
+  const fest = fv==='__custom__'?cn:fv;
+  const yr = document.getElementById('ns-year').value.trim();
+  const dt = document.getElementById('ns-date').value.trim();
+  const err = document.getElementById('ns-err');
+  if (!fest) { err.textContent='請填寫節日名稱'; err.style.display='block'; return; }
+  if (!yr||!/^\d{4}$/.test(yr)) { err.textContent='請填寫正確年份'; err.style.display='block'; return; }
+  let key = `${fest} ${yr}`;
+  if (menuData[key]) { let s=2; while(menuData[`${key}-${s}`]) s++; key=`${key}-${s}`; }
+  menuData[key] = {date:dt||yr, dishes:[], dizhu:null};
+  buildNav();
+  toggleNewSessionForm();
+  showMenu(key);
+  ['ns-year','ns-date','ns-custom-name'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('ns-festival').value='除夕';
+  document.getElementById('ns-custom-row').style.display='none';
+}
+
+// New dish
+function toggleNewDishForm() {
+  document.getElementById('newDishForm').classList.toggle('show');
+}
+function commitNewDish() {
+  const name=(document.getElementById('nd-name').value||'').trim();
+  if (!name) return;
+  const ingrRaw=document.getElementById('nd-ingr').value;
+  const note=document.getElementById('nd-note').value.trim();
+  const ingredients=ingrRaw?ingrRaw.split(/[,，]/).map(s=>s.trim()).filter(Boolean):[];
+  menuData[currentMenu].dishes.push({name,ingredients,note});
+  renderMenuContent();
+}
+
+// ════════════════════════════════════════════════
+// 採購清單
+// ════════════════════════════════════════════════
+function toggleShopping() {
+  document.getElementById('shoppingPanel').classList.toggle('open');
+}
+
+function updateShoppingPanel() {
+  if (!currentMenu) return;
+  const persons = getPersons();
+  const qd = qtyMemory[currentMenu]||{};
+  const totals = {};
+  const groups = {整份:{},個人份:{},固定配料:{},未連結:{}};
+
+  menuData[currentMenu].dishes.forEach((dish,i) => {
+    const dq = qd[i]||{};
+    dish.ingredients.forEach(ing => {
+      const mem = dq[ing];
+      if (!mem||!mem.qty) return;
+      const dbRec = lookupIngredient(ing);
+      const dt = dbRec?.dishType||'未連結';
+      const unit = mem.unit||'';
+      let display = '';
+      if (dt==='整份') {
+        const need = Math.ceil(persons/mem.qty);
+        display = `${need} ${dbRec.unit}`;
+      } else if (dt==='固定配料') {
+        display = `${mem.qty} ${unit}`;
+      } else {
+        display = `${mem.qty*persons} ${unit}`;
+      }
+      const grp = groups[dt]||groups['未連結'];
+      grp[ing] = display;
+    });
+  });
+
+  let html = '';
+  const order = ['整份','個人份','固定配料','未連結'];
+  const labels = {整份:'整份料理',個人份:'個人份食材',固定配料:'固定配料',未連結:'未連結食材'};
+  order.forEach(grp => {
+    const items = groups[grp];
+    if (!Object.keys(items).length) return;
+    html += `<div class="sp-group-label">${labels[grp]}</div>`;
+    Object.entries(items).forEach(([name,qty]) => {
+      html += `<div class="sp-item"><span class="sp-name">${name}</span><span class="sp-qty">${qty}</span></div>`;
+    });
+  });
+  document.getElementById('spContent').innerHTML = html||'<div class="sp-empty">點擊食材標籤來輸入份量</div>';
+}
+
+// ════════════════════════════════════════════════
+// 列印菜單
+// ════════════════════════════════════════════════
+function openPrint() {
+  if (!currentMenu) return;
+  const menu = menuData[currentMenu];
+  const parts = currentMenu.split(' ');
+  const yr = parts[parts.length-1].replace(/-\d+$/,'');
+  const fest = parts.slice(0,-1).join(' ');
+  document.getElementById('pc-eyebrow').textContent = yr + '　FESTIVAL MENU';
+  document.getElementById('pc-title').textContent = fest;
+  document.getElementById('pc-date').textContent = menu.date;
+  document.getElementById('pc-dishes').innerHTML = menu.dishes.map((d,i)=>
+    `<li class="pc-dish"><span class="pc-dnum">${String(i+1).padStart(2,'0')}</span><span>${d.name}</span></li>`
+  ).join('');
+  document.getElementById('printOverlay').classList.add('open');
+}
+function closePrint() { document.getElementById('printOverlay').classList.remove('open'); }
+document.getElementById('printOverlay').addEventListener('click', e=>{ if(e.target===e.currentTarget)closePrint(); });
+
+// ════════════════════════════════════════════════
+// 食材資料庫
+// ════════════════════════════════════════════════
+let dbSortCol='name', dbSortDir=1, dbAddRowVisible=false;
+const CAT_LIST   = ["蔬菜","禽畜","海鮮","豆蛋","辛香料","醬料","現成品","穀糧","乳製品","乾貨","湯底"];
+const DISH_TYPES = ["整份","個人份","固定配料"];
+const UNIT_LIST  = ["公克","毫升","尾","隻","條","把","顆","個","片","包","罐","斤","支","副","塊","碗","份","盒","桶"];
+
+function dbConvText(r, persons) {
+  if (!r.dishType||r.convQty===null) return '';
+  const p=persons||8;
+  if (r.dishType==='整份')    return r.convQty+'人/1'+r.unit+' → 需 <b>'+Math.ceil(p/r.convQty)+'</b>'+r.unit;
+  if (r.dishType==='個人份')  return r.convQty+r.convUnit+'/人 → 需 <b>'+(r.convQty*p)+'</b>'+r.convUnit;
+  if (r.dishType==='固定配料') return '固定 <b>'+r.convQty+'</b>'+r.convUnit;
+  return '';
+}
+
+function renderDB() {
+  const q   = document.getElementById('dbSearch').value.trim().toLowerCase();
+  const cf  = document.getElementById('dbCatFilter').value;
+  const df  = document.getElementById('dbDishFilter').value;
+  let rows  = db.filter(r => {
+    if (q && !r.name.toLowerCase().includes(q) && !(r.aliases||[]).some(a=>a.toLowerCase().includes(q))) return false;
+    if (cf==='未分類') { if (r.cat!=='') return false; }
+    else if (cf && r.cat!==cf) return false;
+    const dtl = r.dishType==='整份'?'整份料理': r.dishType==='個人份'?'個人份': r.dishType==='固定配料'?'固定配料':'';
+    if (df==='未設定') { if (r.dishType!=='') return false; }
+    else if (df && dtl!==df) return false;
+    return true;
+  });
+  rows.sort((a,b)=>{ const av=a[dbSortCol]||'zzz', bv=b[dbSortCol]||'zzz'; return av.localeCompare(bv,'zh-TW')*dbSortDir; });
+  document.getElementById('dbCount').textContent='共 '+rows.length+' 筆';
+  [['name','name'],['cat','cat'],['dish','dishType'],['unit','unit']].forEach(([k,col])=>{
+    const el=document.getElementById('arr-'+k);
+    if (el) el.textContent=dbSortCol===col?(dbSortDir===1?'↑':'↓'):'↕';
+  });
+  const p = getPersons();
+  let html='';
+  if (!rows.length) { html='<tr class="empty-row"><td colspan="8">查無符合的食材</td></tr>'; }
+  else rows.forEach((r,i)=>{
+    const pending=!r.cat||!r.dishType||!r.unit;
+    const catBadge=r.cat
+      ?`<span class="cat-badge cat-${r.cat}" onclick="dbEditField(${r.id},'cat')">${r.cat}</span>`
+      :`<span class="cat-badge cat-未分類" onclick="dbEditField(${r.id},'cat')">未分類<span class="pstar">★</span></span>`;
+    const dtLabel=r.dishType==='整份'?'整份料理':r.dishType==='個人份'?'個人份':r.dishType==='固定配料'?'固定配料':'';
+    const dtBadge=dtLabel
+      ?`<span class="dish-badge dish-${r.dishType}" onclick="dbEditField(${r.id},'dishType')">${dtLabel}</span>`
+      :`<span class="dish-badge dish-pending" onclick="dbEditField(${r.id},'dishType')">未設定<span class="pstar">★</span></span>`;
+    const unitCell=r.unit
+      ?`<span style="cursor:pointer" onclick="dbEditField(${r.id},'unit')">${r.unit}</span>`
+      :`<span style="cursor:pointer;color:#aaa" onclick="dbEditField(${r.id},'unit')">未設定<span class="pstar">★</span></span>`;
+    const cv=(r.dishType&&r.convQty!==null)
+      ?dbConvText(r,p)
+      :`<span class="conv-pending" onclick="dbEditConv(${r.id})">點擊設定<span class="pstar">★</span></span>`;
+    const aliasNote=[
+      (r.aliases&&r.aliases.length)?`<span style="color:#aaa">${r.aliases.join('、')}</span>`:'',
+      r.note?`<span style="font-style:italic">${r.note}</span>`:''
+    ].filter(Boolean).join(' ');
+    html+=`<tr id="dbrow-${r.id}" class="${pending?'prow':''}">
+      <td class="cn">${i+1}</td>
+      <td class="cname">${r.name}</td>
+      <td class="ccat">${catBadge}</td>
+      <td class="cdish">${dtBadge}</td>
+      <td class="cunit">${unitCell}</td>
+      <td class="cconv" id="dbconv-${r.id}">${cv}</td>
+      <td class="cnote">${aliasNote}</td>
+      <td><button class="del-btn" onclick="dbDeleteRow(${r.id})">✕</button></td>
+    </tr>`;
+  });
+  if (dbAddRowVisible) {
+    const co=CAT_LIST.map(c=>`<option>${c}</option>`).join('');
+    const do_=DISH_TYPES.map(d=>`<option>${d}</option>`).join('');
+    const uo=UNIT_LIST.map(u=>`<option>${u}</option>`).join('');
+    html+=`<tr class="add-row">
+      <td class="cn">＋</td>
+      <td><input class="add-inp" id="db-add-name" placeholder="食材名稱" onkeydown="if(event.key==='Enter')dbCommitAdd()"></td>
+      <td><select class="isel add-inp" id="db-add-cat"><option value="">未分類</option>${co}</select></td>
+      <td><select class="isel add-inp" id="db-add-dt"><option value="">未設定</option>${do_}</select></td>
+      <td><select class="isel add-inp" id="db-add-unit"><option value="">未設定</option>${uo}</select></td>
+      <td></td><td></td>
+      <td><span style="display:flex;gap:4px">
+        <button class="icon-btn" onclick="dbCommitAdd()">✓</button>
+        <button class="icon-btn" onclick="dbCancelAdd()">✕</button>
+      </span></td>
+    </tr>`;
+  }
+  document.getElementById('dbTableBody').innerHTML=html;
+  if (dbAddRowVisible) document.getElementById('db-add-name')?.focus();
+}
+
+function dbSortBy(col) { if(dbSortCol===col)dbSortDir*=-1; else{dbSortCol=col;dbSortDir=1;} renderDB(); }
+
+function dbEditField(id,field) {
+  const r=db.find(x=>x.id===id); if(!r) return;
+  const colClass=field==='dishType'?'cdish':'c'+field;
+  const cell=document.querySelector(`#dbrow-${id} .${colClass}`); if(!cell) return;
+  let opts='';
+  if(field==='cat') opts=[...CAT_LIST,'未分類'].map(c=>`<option${r.cat===c?' selected':''}>${c}</option>`).join('');
+  else if(field==='dishType') opts=`<option value="">未設定</option>`+DISH_TYPES.map(d=>`<option${r.dishType===d?' selected':''}>${d}</option>`).join('');
+  else if(field==='unit') opts=`<option value="">未設定</option>`+UNIT_LIST.map(u=>`<option${r.unit===u?' selected':''}>${u}</option>`).join('');
+  cell.innerHTML=`<select class="isel" onchange="dbSaveField(${id},'${field}',this.value)" onblur="renderDB()">${opts}</select>`;
+  cell.querySelector('select').focus();
+}
+function dbSaveField(id,field,val) {
+  const r=db.find(x=>x.id===id); if(!r) return;
+  if(field==='cat') r.cat=val==='未分類'?'':val;
+  else r[field]=val;
+  renderDB(); showToast('已更新');
+}
+function dbEditConv(id) {
+  const r=db.find(x=>x.id===id); if(!r) return;
+  const cell=document.getElementById('dbconv-'+id); if(!cell) return;
+  const hint=!r.dishType?'請先設定菜餚類型':{整份:'幾人一份',個人份:'每人用量',固定配料:'固定總量'}[r.dishType]||'';
+  cell.innerHTML=`<span style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+    <input class="cinput" id="dbcq-${id}" type="number" min="0" step="0.5" value="${r.convQty??''}" placeholder="數量" style="width:52px">
+    <input class="cinput" id="dbcu-${id}" value="${r.convUnit}" placeholder="單位" style="width:44px">
+    <button class="icon-btn" onclick="dbSaveConv(${id})">✓</button>
+    <span style="font-size:0.68rem;color:#aaa">${hint}</span>
+  </span>`;
+  document.getElementById('dbcq-'+id)?.focus();
+}
+function dbSaveConv(id) {
+  const r=db.find(x=>x.id===id); if(!r) return;
+  const qv=document.getElementById('dbcq-'+id)?.value;
+  const uv=document.getElementById('dbcu-'+id)?.value||'';
+  r.convQty=qv!==''?parseFloat(qv):null; r.convUnit=uv;
+  renderDB(); showToast('換算已更新');
+}
+function showDBAddRow(){dbAddRowVisible=true;renderDB();}
+function dbCancelAdd(){dbAddRowVisible=false;renderDB();}
+function dbCommitAdd(){
+  const name=(document.getElementById('db-add-name')?.value||'').trim();
+  if(!name){showToast('請輸入食材名稱');return;}
+  const cat=document.getElementById('db-add-cat')?.value||'';
+  const dt=document.getElementById('db-add-dt')?.value||'';
+  const unit=document.getElementById('db-add-unit')?.value||'';
+  db.push({id:dbNextId++,name,cat,dishType:dt,unit,convQty:null,convUnit:'',aliases:[],note:''});
+  dbAddRowVisible=false; renderDB(); showToast('已新增：'+name);
+}
+function dbDeleteRow(id){
+  const r=db.find(x=>x.id===id);
+  if(!r||!confirm(`確定刪除「${r.name}」？`)) return;
+  db=db.filter(x=>x.id!==id); renderDB(); showToast('已刪除：'+r.name);
+}
+
+// Export
+function openExportModal()  { document.getElementById('exportModal').classList.add('open'); }
+function closeExportModal() { document.getElementById('exportModal').classList.remove('open'); }
+function exportCSV(){
+  const hdr='名稱,類別,菜餚類型,採購單位,換算數量,換算單位,別名,備註\n';
+  const rows=db.map(r=>`"${r.name}","${r.cat||'未分類'}","${r.dishType||'未設定'}","${r.unit||'未設定'}","${r.convQty??''}","${r.convUnit}","${(r.aliases||[]).join('/')}","${r.note||''}"`).join('\n');
+  dlFile('食材資料庫.csv','\uFEFF'+hdr+rows,'text/csv');
+  closeExportModal(); showToast('CSV 已下載');
+}
+function exportJSON(){
+  dlFile('食材資料庫.json',JSON.stringify(db,null,2),'application/json');
+  closeExportModal(); showToast('JSON 已下載');
+}
+function dlFile(fn,c,t){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([c],{type:t}));
+  a.download=fn; a.click();
+}
+document.getElementById('exportModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeExportModal();});
+
+// ════════════════════════════════════════════════
+// Init
+// ════════════════════════════════════════════════
+buildNav();
+document.getElementById('exportBtn').style.display='none';
+</script>
+</body>
+</html>
