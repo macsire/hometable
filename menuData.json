@@ -1,0 +1,242 @@
+{
+  "除夕 2026": {
+    "date": "2026.02.16 MON.",
+    "dishes": [
+      {"name":"滷豬肉","ingredients":["二層肉"],"note":""},
+      {"name":"清蒸海石斑","ingredients":["海石斑","嫩豆腐"],"note":""},
+      {"name":"竹笙蓮子干貝雞湯","ingredients":["烏骨雞","竹笙","干貝","蓮子"],"note":""},
+      {"name":"青椒炒豬肝","ingredients":["豬肝","青椒","蒜頭"],"note":""},
+      {"name":"蕃薯葉","ingredients":["菠菜","薑絲","豆豉","香菇"],"note":""},
+      {"name":"炸魚柳","ingredients":["蝦仁","腰果","青椒","紅椒","黃椒"],"note":""},
+      {"name":"上湯蝦仁長年菜","ingredients":["長芥菜","蝦仁","上湯"],"note":""},
+      {"name":"素炸鱈排","ingredients":["素鱈魚"],"note":"素"},
+      {"name":"焗烤白菜","ingredients":["天津白菜","乳酪絲","帕馬森","牛奶"],"note":""},
+      {"name":"家傳兜錢菜","ingredients":["蕃薯粉","紅菜頭","蒜葉","櫻花蝦"],"note":""},
+      {"name":"御白飯","ingredients":[],"note":""},
+      {"name":"菜頭粿","ingredients":["菜頭粿"],"note":""}
+    ],
+    "dizhu": ["雞腿排","溫泉蛋","清炒蔬食","青菜","白飯","茶水"]
+  },
+  "初二 2026": {
+    "date": "2026.02.18 WED.",
+    "dishes": [
+      {"name":"烏參佛跳牆","ingredients":["佛跳牆"],"note":""},
+      {"name":"粉肝","ingredients":["粉肝","蒜白"],"note":""},
+      {"name":"燒烤梅花肉片","ingredients":["梅花肉片","洋蔥","蔥段"],"note":""},
+      {"name":"炸雞佐生菜","ingredients":["雞腿肉","生菜"],"note":""},
+      {"name":"烤香魚","ingredients":["香魚","抹茶鹽"],"note":""},
+      {"name":"胡蘿蔔烘蛋","ingredients":["雞蛋","紅蘿蔔","甜豆","抱子甘藍","黑橄欖"],"note":""},
+      {"name":"扇貝燴芥菜櫻花蝦","ingredients":["扇貝","芥菜","櫻花蝦"],"note":""},
+      {"name":"菇菇蝦肉丸清湯","ingredients":["冬菇","丸子"],"note":""},
+      {"name":"御白飯","ingredients":["白飯"],"note":""}
+    ],
+    "dizhu": null
+  },
+  "清明 2026": {
+    "date": "2026.04.19 SUN.",
+    "dishes": [
+      {"name":"家常滷肉","ingredients":["豬肉","蔥","薑","蒜頭"],"note":""},
+      {"name":"蒸魚","ingredients":["石斑","蔥","紅辣椒","豆豉","薑絲"],"note":""},
+      {"name":"甘蔗雞","ingredients":["甘蔗雞","椒鹽粉"],"note":""},
+      {"name":"醬燒肋排","ingredients":["肋排","娃娃菜"],"note":""},
+      {"name":"清燙白蝦","ingredients":["白蝦","芥末醬"],"note":""},
+      {"name":"香菇黃瓜清湯","ingredients":["大黃瓜","香菇","剝皮辣椒","昆布"],"note":""},
+      {"name":"苦瓜皮蛋","ingredients":["苦瓜","皮蛋","味噌醬","豆腐","胡蘿蔔"],"note":""},
+      {"name":"綜合蔬菜溫沙拉","ingredients":["高麗菜","節瓜","甜豆","木耳","甜椒"],"note":"素"},
+      {"name":"涼筍","ingredients":["竹筍","沙拉醬"],"note":""},
+      {"name":"素豆皮捲","ingredients":["豆皮捲","辣椒醬"],"note":"素"},
+      {"name":"白飯","ingredients":["白米"],"note":""}
+    ],
+    "dizhu": ["雞腿","水煮蛋","青菜","草仔粿","白飯","茶水"]
+  },
+  "端午 2025-1": {
+    "date": "2025.06.19 FRI.",
+    "dishes": [
+      {"name":"家常炕肉","ingredients":["五花肉","啤酒","薑"],"note":""},
+      {"name":"鮮蒸青雞","ingredients":["青雞魚"],"note":""},
+      {"name":"蝦仁烘蛋","ingredients":["蝦仁","蛋"],"note":""},
+      {"name":"剝椒雞香腸","ingredients":["台酒香腸","蒜頭"],"note":""},
+      {"name":"上湯娃娃菜","ingredients":["娃娃菜","紅菜頭","冬菇","金針菇"],"note":""},
+      {"name":"溫泉空心菜","ingredients":["空心菜","蒜頭"],"note":"素"},
+      {"name":"宜蘭粉肝","ingredients":["粉肝"],"note":""},
+      {"name":"糯椒皮蛋","ingredients":["糯米椒","皮蛋","剝皮辣椒","紅辣椒","柴魚"],"note":""},
+      {"name":"涼筍","ingredients":["綠竹筍"],"note":""},
+      {"name":"冬瓜排骨湯","ingredients":["冬瓜","排骨","竹笙"],"note":""},
+      {"name":"白飯","ingredients":["白米"],"note":""},
+      {"name":"粽子、粿粽","ingredients":["北部粽","宜蘭粽","粿粽"],"note":""}
+    ],
+    "dizhu": ["滷肉","滷蛋","空心菜","肉粽","白飯","茶水"]
+  },
+  "重陽 2025": {
+    "date": "2025.10.29 WED.",
+    "dishes": [
+      {"name":"炸豬排","ingredients":["豬排"],"note":""},
+      {"name":"鹿茸烏骨雞湯","ingredients":["烏骨雞"],"note":""},
+      {"name":"乾煎虱目魚肚","ingredients":["虱目魚","米酒","蔥"],"note":""},
+      {"name":"草蝦","ingredients":["草蝦","蒜頭"],"note":""},
+      {"name":"青龍皮蛋","ingredients":["糯米椒","皮蛋"],"note":""},
+      {"name":"香菇炒青菜","ingredients":["萵苣","香菇"],"note":"素"},
+      {"name":"干貝醬炒高麗菜","ingredients":["高麗菜","干貝醬","黑木耳"],"note":""},
+      {"name":"沙拉涼筍","ingredients":["綠竹筍","美乃滋"],"note":""},
+      {"name":"香煎素餘","ingredients":["素鱈魚"],"note":"素"},
+      {"name":"白飯","ingredients":[],"note":""}
+    ],
+    "dizhu": ["雞腿","青菜","高麗菜","茶葉蛋","白飯","茶水"]
+  },
+  "中元 2025": {
+    "date": "2025.09.06 SAT.",
+    "dishes": [
+      {"name":"紅燒肉","ingredients":["五花肉","薑","蔥","蒜頭"],"note":""},
+      {"name":"雞腿排","ingredients":["雞腿肉","洋釀醬"],"note":""},
+      {"name":"鮮蒸石斑","ingredients":["石斑魚","醬汁","薑"],"note":""},
+      {"name":"清燙白蝦","ingredients":["白蝦","芥末"],"note":""},
+      {"name":"炸物","ingredients":["雞捲","甜辣醬"],"note":""},
+      {"name":"青椒炒豬肝","ingredients":["豬肝","青椒","紅椒","蒜頭"],"note":""},
+      {"name":"涼筍","ingredients":["綠竹筍","沙拉醬"],"note":""},
+      {"name":"炒A菜","ingredients":["A菜","香菇"],"note":"素"},
+      {"name":"酸菜素腸","ingredients":["豆腸","酸菜","辣椒","薑"],"note":"素"},
+      {"name":"冬瓜蓮子排骨湯","ingredients":["排骨","冬瓜","蓮子","秀珍菇"],"note":""},
+      {"name":"白飯","ingredients":["白米"],"note":""},
+      {"name":"鹼粽","ingredients":["鹼粽","蜂蜜"],"note":""}
+    ],
+    "dizhu": ["雞腿","水煮蛋","青菜","鹼粽","白飯","茶水"]
+  },
+  "端午 2025": {
+    "date": "2025.05.31 SAT.",
+    "dishes": [
+      {"name":"梅干菜燒肉","ingredients":["五花肉","梅干菜","蔥","辣椒","薑"],"note":""},
+      {"name":"樹子蒸白鯧","ingredients":["白鯧","破布子","薑","蒜頭"],"note":""},
+      {"name":"蝦仁烘蛋","ingredients":["蝦仁","蛋","蔥","紅菜頭"],"note":""},
+      {"name":"原味香腸","ingredients":["香腸","蒜頭","甜辣醬"],"note":""},
+      {"name":"炸肉捲","ingredients":["肉捲","甜辣醬","小黃瓜"],"note":""},
+      {"name":"涼拌茄子","ingredients":["茄子"],"note":"素"},
+      {"name":"炒青菜","ingredients":["大陸妹","香菇"],"note":"素"},
+      {"name":"涼筍","ingredients":["綠竹筍","沙拉醬"],"note":""},
+      {"name":"蜜汁豆包","ingredients":["豆包","青椒","紅椒","紅菜頭","番茄醬"],"note":"素"},
+      {"name":"鳳梨苦瓜雞湯","ingredients":["雞腿肉","苦瓜","蔭鳳梨","鳳梨","梅子"],"note":""},
+      {"name":"白飯","ingredients":["白米"],"note":""},
+      {"name":"肉粽","ingredients":["北部粽","彰化粽"],"note":""}
+    ],
+    "dizhu": ["梅干燒肉","煎蛋","青菜","香腸","白飯","茶水"]
+  },
+  "清明 2025": {
+    "date": "2025.03.31 MON.",
+    "dishes": [
+      {"name":"三層肉","ingredients":["三層肉條","蔥","嫩薑","蒜頭","米酒"],"note":""},
+      {"name":"蒜烤鱸魚","ingredients":["金目鱸魚","洋蔥","紅椒","青椒"],"note":""},
+      {"name":"蝦仁烘蛋","ingredients":["蛋","蝦仁","干貝醬","明太子醬"],"note":""},
+      {"name":"雞柳山賊燒","ingredients":["雞里肌肉","山賊醬"],"note":""},
+      {"name":"烤香腸","ingredients":["香腸","大蒜"],"note":""},
+      {"name":"炸肉卷","ingredients":["肉捲","甜辣醬"],"note":""},
+      {"name":"水炒蕃薯葉","ingredients":["蕃薯葉","嫩薑"],"note":"素"},
+      {"name":"三杯紫茄","ingredients":["茄子","辣椒"],"note":"素"},
+      {"name":"芹香豆絲","ingredients":["豆皮","芹菜","紅菜頭","菇"],"note":"素"},
+      {"name":"菜頭丸子清湯","ingredients":["白蘿蔔","貢丸","蔥"],"note":""},
+      {"name":"白飯","ingredients":["白米"],"note":""}
+    ],
+    "dizhu": ["雞柳山賊燒","水煮蛋","香脆筍","烤香腸","白飯","茶水"]
+  },
+  "初二 2025": {
+    "date": "2025.01.30 THU.",
+    "dishes": [
+      {"name":"醬燒大腸","ingredients":["大腸","青椒"],"note":""},
+      {"name":"烏魚子、香腸、燒肉","ingredients":["烏魚子","梨子","蛋"],"note":""},
+      {"name":"燙青菜","ingredients":["A菜"],"note":"素"},
+      {"name":"蒜炒鹹豬肉","ingredients":["鹹豬肉","青蒜","豆莢"],"note":""},
+      {"name":"綜合海鮮","ingredients":["鮭魚","澎湖大蝦","花枝","牡蠣","柳葉魚"],"note":""},
+      {"name":"鐵板蔬菜","ingredients":["櫛瓜","紅菜頭","玉米筍","香菇","青花菜"],"note":"素"},
+      {"name":"焗烤娃娃菜","ingredients":["娃娃菜","乳酪","紅菜頭","乳酪絲"],"note":""},
+      {"name":"佛跳牆","ingredients":["佛跳牆"],"note":""},
+      {"name":"蔬菜清湯","ingredients":["凍豆腐","貢丸","香菇","白菜頭"],"note":""},
+      {"name":"御白飯","ingredients":["白飯"],"note":""},
+      {"name":"菜頭粿","ingredients":["菜頭粿"],"note":""}
+    ],
+    "dizhu": null
+  },
+  "除夕 2025": {
+    "date": "2025.01.28 TUE.",
+    "dishes": [
+      {"name":"小菜三品","ingredients":["韓式泡菜","美濃菜頭","烏魚子"],"note":""},
+      {"name":"酥炸紅燒肉","ingredients":["紅糟肉","蒜白"],"note":""},
+      {"name":"鮮蒸石斑","ingredients":["龍虎石斑","薑絲","醬汁"],"note":""},
+      {"name":"蔗香土雞","ingredients":["土雞","胡椒鹽"],"note":""},
+      {"name":"手工香腸","ingredients":["宜蘭香腸","蒜白"],"note":""},
+      {"name":"清炒時蔬","ingredients":["芥蘭芽","香菇","秀珍菇","紅菜頭"],"note":"素"},
+      {"name":"青龍皮蛋","ingredients":["糯米椒","皮蛋","紅辣椒","紅菜頭"],"note":""},
+      {"name":"素蒲燒鰻","ingredients":["茄子","豆皮","青花菜"],"note":"素"},
+      {"name":"排骨湯","ingredients":["豬小排","蛤蜊","芥菜","薑","蒜片"],"note":""},
+      {"name":"家傳兜錢菜","ingredients":["蕃薯粉","臘肉","蒜葉","紅菜頭","香菇","干貝醬"],"note":""},
+      {"name":"御白飯","ingredients":[],"note":""}
+    ],
+    "dizhu": ["雞腿","水煮蛋","清炒蔬食","青菜","白飯","茶水"]
+  },
+  "重陽 2024": {
+    "date": "2024.10.11 FRI.",
+    "dishes": [
+      {"name":"信州味噌燒肉","ingredients":["三層肉","味噌"],"note":""},
+      {"name":"甘蔗燻雞","ingredients":["甘蔗雞","胡椒鹽"],"note":""},
+      {"name":"沙嗲蝦","ingredients":["白蝦","沙嗲醬","蔥仔","蒜頭"],"note":""},
+      {"name":"阿富肉捲","ingredients":["阿富肉捲","瓜仔哖"],"note":""},
+      {"name":"白胡椒排骨湯","ingredients":["箅仔骨","蒜頭"],"note":""},
+      {"name":"五更豆腐腸旺","ingredients":["五更腸旺","豆腐","蔥仔"],"note":""},
+      {"name":"三絲烘蛋","ingredients":["蛋","紅菜頭","大同仔","剝皮番薑"],"note":""},
+      {"name":"綜合素炸物","ingredients":["芋仔糋","菜丸仔糋"],"note":"素"},
+      {"name":"醬燒豆輪","ingredients":["豆輪","紅菜頭","杏鮑菇","香菇"],"note":"素"},
+      {"name":"燙地瓜葉","ingredients":["蕃薯葉"],"note":"素"},
+      {"name":"素炒高麗菜","ingredients":["高麗菜","烏木耳","紅菜頭"],"note":"素"},
+      {"name":"白飯","ingredients":["白米"],"note":""}
+    ],
+    "dizhu": ["雞腿排","水煮蛋","燙青菜","椒鹽杏鮑菇","炒高麗菜","白飯","茶水"]
+  },
+  "中元 2024": {
+    "date": "2024.08.18 SUN.",
+    "dishes": [
+      {"name":"筍乾燉肉","ingredients":["三層肉","筍乾","蒜頭","米酒"],"note":""},
+      {"name":"蒜香煎鮭魚","ingredients":["鮭魚","蒜頭","奶油"],"note":""},
+      {"name":"藍鑽蝦排","ingredients":["蝦排","甜辣醬"],"note":""},
+      {"name":"嘉義大肉捲","ingredients":["阿富肉捲","甜辣醬","小黃瓜"],"note":""},
+      {"name":"清蒸紫茄","ingredients":["茄子","薑","蒜頭","香菜","辣椒"],"note":""},
+      {"name":"菜瓜煎","ingredients":["絲瓜","香菇","白舞菇","破布子"],"note":"素"},
+      {"name":"炒空心菜","ingredients":["空心菜","薑"],"note":"素"},
+      {"name":"紅燒烤麩","ingredients":["烤麩","紅蘿蔔","香菇","黑木耳"],"note":"素"},
+      {"name":"紹興吉捲","ingredients":["紹興吉捲"],"note":""},
+      {"name":"白飯","ingredients":["白米"],"note":""},
+      {"name":"鹼粽","ingredients":["鹼粽","砂糖"],"note":""}
+    ],
+    "dizhu": ["雞腿","水煮蛋","青菜","鹼粽","餅乾","白飯","茶水"]
+  },
+  "端午 2024": {
+    "date": "2024.06.10",
+    "dishes": [
+      {"name":"回鍋肉","ingredients":["三層肉條","蔥","薑","蒜頭","米酒"],"note":""},
+      {"name":"清蒸紅條","ingredients":["燕尾紅條","薑"],"note":""},
+      {"name":"炒豬肝","ingredients":["豬肝","蔥","洋蔥"],"note":""},
+      {"name":"炸八寶捲","ingredients":["澎湖八寶捲","甜辣醬","小黃瓜"],"note":""},
+      {"name":"川耳醋溜","ingredients":["川耳","薑","枸杞"],"note":"素"},
+      {"name":"清炒菠菜","ingredients":["菠菜","香菇"],"note":"素"},
+      {"name":"蔭豉燜苦瓜","ingredients":["白玉苦瓜","紅辣椒"],"note":"素"},
+      {"name":"筍片排骨湯","ingredients":["豬小排","竹筍","蒜頭"],"note":""},
+      {"name":"白飯","ingredients":["白米"],"note":""},
+      {"name":"肉粽","ingredients":["南部粽"],"note":""}
+    ],
+    "dizhu": ["雞腿","魯蛋","青菜","肉粽","白飯","茶水"]
+  },
+  "除夕 2024": {
+    "date": "2024.02.09 FRI.",
+    "dishes": [
+      {"name":"烤香腸","ingredients":[],"note":""},
+      {"name":"煙燻花枝","ingredients":[],"note":""},
+      {"name":"腐皮卷","ingredients":[],"note":""},
+      {"name":"醋溜木耳","ingredients":[],"note":"素"},
+      {"name":"手工花生豆腐","ingredients":[],"note":"素"},
+      {"name":"甘蔗燻雞","ingredients":[],"note":""},
+      {"name":"清蒸石斑","ingredients":[],"note":""},
+      {"name":"紅槽肉佐青花","ingredients":[],"note":""},
+      {"name":"香菇剁椒炒豆苗","ingredients":[],"note":"素"},
+      {"name":"芥菜蛤蠣排骨湯","ingredients":[],"note":""},
+      {"name":"家傳兜錢菜","ingredients":[],"note":""},
+      {"name":"御白飯","ingredients":["白米"],"note":""}
+    ],
+    "dizhu": ["雞腿","魯蛋","青菜","青蔬","白飯","茶水"]
+  }
+}
