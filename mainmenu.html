@@ -564,7 +564,8 @@ select.isel:focus { outline:none; border-color:#c9710f; }
           </div>
           <div class="ns-row">
             <label>日期</label>
-            <input id="ns-date" placeholder="2027.01.28 THU.">
+            <input id="ns-date" placeholder="2027.01.28" oninput="autoWeekday(this)">
+            <div id="ns-date-hint" style="font-size:0.68rem;color:#c9a84c;margin-top:3px;letter-spacing:0.05em"></div>
           </div>
           <div class="ns-actions">
             <button class="ns-btn-add" onclick="addNewSession()">建立</button>
@@ -797,15 +798,25 @@ let currentMenu = null;
 
 function buildNav() {
   const groups = {};
-  Object.keys(menuData).forEach(key => {
+
+  // 依日期降冪排序
+  const sorted = Object.entries(menuData).sort((a, b) => {
+    const da = (a[1].date || '').replace(/\./g, '').substring(0, 8);
+    const db = (b[1].date || '').replace(/\./g, '').substring(0, 8);
+    return db.localeCompare(da);
+  });
+
+  sorted.forEach(([key, val]) => {
     const parts = key.split(' ');
     const yr   = parts[parts.length - 1].replace(/-\d+$/, '');
     const fest = parts.slice(0, -1).join(' ');
     if (!groups[yr]) groups[yr] = [];
     groups[yr].push({ key, fest });
   });
+
   const nav = document.getElementById('navList');
   nav.innerHTML = '';
+  // 年份也降冪
   Object.keys(groups).sort((a, b) => b - a).forEach(yr => {
     const div = document.createElement('div');
     div.className = 'yr-group';
@@ -1020,6 +1031,21 @@ document.getElementById('personsInput').addEventListener('input', () => {
   if (currentMenu) renderMenuContent();
 });
 
+// ── 日期自動對應星期 ──
+const WEEKDAYS = ['SUN.','MON.','TUE.','WED.','THU.','FRI.','SAT.'];
+function autoWeekday(input) {
+  const val = input.value.trim();
+  const hint = document.getElementById('ns-date-hint');
+  // 接受 YYYY.MM.DD 或 YYYY/MM/DD 或 YYYYMMDD
+  const m = val.match(/(\d{4})[.\-\/]?(\d{2})[.\-\/]?(\d{2})/);
+  if (!m) { hint.textContent = ''; return; }
+  const d = new Date(parseInt(m[1]), parseInt(m[2])-1, parseInt(m[3]));
+  if (isNaN(d.getTime())) { hint.textContent = ''; return; }
+  const wd = WEEKDAYS[d.getDay()];
+  hint.textContent = `→ ${m[1]}.${m[2]}.${m[3]} ${wd}`;
+  hint.dataset.full = `${m[1]}.${m[2]}.${m[3]} ${wd}`;
+}
+
 // ── 新增場次 ──
 function toggleNewSessionForm() {
   document.getElementById('newSessionForm').classList.toggle('show');
@@ -1035,7 +1061,8 @@ function addNewSession() {
   const cn   = document.getElementById('ns-custom-name').value.trim();
   const fest = fv === '__custom__' ? cn : fv;
   const yr   = document.getElementById('ns-year').value.trim();
-  const dt   = document.getElementById('ns-date').value.trim();
+  const hint = document.getElementById('ns-date-hint');
+  const dt   = hint?.dataset.full || document.getElementById('ns-date').value.trim() || yr;
   const err  = document.getElementById('ns-err');
   if (!fest) { err.textContent = '請填寫節日名稱'; err.style.display = 'block'; return; }
   if (!yr || !/^\d{4}$/.test(yr)) { err.textContent = '請填寫正確年份'; err.style.display = 'block'; return; }
@@ -1047,6 +1074,8 @@ function addNewSession() {
   toggleNewSessionForm();
   showMenu(key);
   ['ns-year', 'ns-date', 'ns-custom-name'].forEach(id => document.getElementById(id).value = '');
+  const hint2 = document.getElementById('ns-date-hint');
+  if (hint2) { hint2.textContent = ''; hint2.dataset.full = ''; }
   document.getElementById('ns-festival').value = '除夕';
   document.getElementById('ns-custom-row').style.display = 'none';
 }
