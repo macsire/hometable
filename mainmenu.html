@@ -350,17 +350,16 @@ body {
 .pc-title .pc-bracket { font-size:0.72rem; color:#8A5700; vertical-align:middle; letter-spacing:0; }
 .pc-date { font-size:0.72rem; color:#8A5700; text-align:center; letter-spacing:0.18em; margin-bottom:10px; font-family:'SweiB2SugarBold','Georgia',serif; }
 .pc-mid { width:48px; height:1px; background:#D99414; margin:0 auto 10px; }
-.pc-dishes { flex:1; list-style:none; display:flex; flex-direction:column; }
+.pc-dishes { flex:1; list-style:none; display:flex; flex-direction:column; padding-left:80px; }
 .pc-dish {
-  display:flex; align-items:baseline; gap:10px;
-  flex: 1;  /* 14 道平均分配高度 */
+  display:flex; align-items:center; gap:10px;
+  flex: 1;
   border-bottom:1px dotted #e0d0b0;
   font-size:0.9rem; color:#1a1a1a; font-family:'B2Hana','Georgia',serif;
-  align-items: center;
 }
 .pc-dish:last-child { border-bottom:none; }
 .pc-dnum { font-size:0.62rem; color:#8A5700; min-width:18px; font-family:'SweiB2SugarBold','Georgia',serif; }
-.pc-footer { margin-top:8px; text-align:center; font-size:0.55rem; color:#D99414; letter-spacing:0.3em; text-transform:uppercase; }
+.pc-footer { margin-top:50px; text-align:center; font-size:0.55rem; color:#D99414; letter-spacing:0.3em; text-transform:uppercase; }
 
 @media print {
   .top-nav, .menu-sidebar, .shopping-panel, .print-overlay .pc-close, .print-overlay .pc-do { display:none!important; }
@@ -400,20 +399,37 @@ body {
 .db-legend {
   padding:8px 36px; background:#FFF7E6; border-bottom:1px solid #D99414;
   display:flex; gap:18px; flex-wrap:wrap; align-items:center;
-  position: sticky; top: var(--toolbar-bottom, 116px); z-index: 99;
+  position: sticky; top: var(--legend-top, 116px); z-index: 99;
 }
 .leg-title { font-size:0.72rem; color:#8A5700; letter-spacing:0.15em; font-weight:bold; }
 .leg-item { display:flex; align-items:center; gap:5px; font-size:0.78rem; color:#222222; }
 
-.db-table-wrap { padding:0 36px 60px; overflow-x:auto; }
-table { width:100%; border-collapse:collapse; font-size:0.88rem; }
+.db-table-wrap { padding:0 36px 60px; }
+.db-table-outer { overflow-x: auto; }
+table { width:100%; border-collapse:collapse; font-size:0.88rem; table-layout: fixed; }
+thead { display: table; width: 100%; table-layout: fixed; }
+thead tr { display: table-row; }
 thead th {
   text-align:left; padding:10px 11px; font-size:0.72rem; letter-spacing:0.15em;
   color:#633A27; border-bottom:2px solid #D99414; white-space:nowrap;
   cursor:pointer; user-select:none; font-weight:bold;
-  background:#ffffff; position:sticky; top: var(--thead-top, 200px);
+  background:#ffffff;
 }
 thead th:hover { color:#163B5C; }
+.db-thead-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 98;
+  background: #ffffff;
+  overflow-x: auto;
+  border-bottom: 2px solid #D99414;
+}
+.db-thead-sticky table { border-bottom: none; }
+.db-thead-sticky thead th { border-bottom: none; }
+.db-tbody-wrap {
+  overflow-x: auto;
+}
+.db-tbody-wrap table { border-top: none; }
 .sort-arr { font-size:0.6rem; margin-left:3px; }
 tbody tr { border-bottom:1px solid #e8e0d0; transition:background 0.08s; }
 tbody tr:hover { background:#FFF7E6; }
@@ -630,21 +646,29 @@ select.isel:focus { outline:none; border-color:#c9710f; }
     <span class="leg-item"><span class="dish-badge dish-固定配料">固定配料</span>&nbsp;蔥薑蒜、醬料 — 固定總量</span>
   </div>
   <div class="db-table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th class="cn">#</th>
-          <th onclick="dbSortBy('name')">名稱 <span class="sort-arr" id="arr-name">↕</span></th>
-          <th onclick="dbSortBy('cat')">類別 <span class="sort-arr" id="arr-cat">↕</span></th>
-          <th onclick="dbSortBy('dishType')">菜餚類型 <span class="sort-arr" id="arr-dish">↕</span> <span style="color:#c9a84c;font-size:0.58rem">★</span></th>
-          <th onclick="dbSortBy('unit')">採購單位 <span class="sort-arr" id="arr-unit">↕</span></th>
-          <th>採購換算 <span style="color:#c9a84c;font-size:0.58rem">★</span></th>
-          <th>別名／備註</th>
-          <th style="width:40px"></th>
-        </tr>
-      </thead>
-      <tbody id="dbTableBody"></tbody>
-    </table>
+    <!-- 固定表頭 -->
+    <div class="db-thead-sticky" id="dbTheadSticky">
+      <table>
+        <thead>
+          <tr>
+            <th class="cn" style="width:36px">#</th>
+            <th style="min-width:88px" onclick="dbSortBy('name')">名稱 <span class="sort-arr" id="arr-name">↕</span></th>
+            <th style="min-width:86px" onclick="dbSortBy('cat')">類別 <span class="sort-arr" id="arr-cat">↕</span></th>
+            <th style="min-width:100px" onclick="dbSortBy('dishType')">菜餚類型 <span class="sort-arr" id="arr-dish">↕</span> <span style="color:#D99414;font-size:0.58rem">★</span></th>
+            <th style="min-width:76px" onclick="dbSortBy('unit')">採購單位 <span class="sort-arr" id="arr-unit">↕</span></th>
+            <th style="min-width:150px">採購換算 <span style="color:#D99414;font-size:0.58rem">★</span></th>
+            <th style="min-width:110px">別名／備註</th>
+            <th style="width:40px"></th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <!-- 捲動 tbody -->
+    <div class="db-tbody-wrap">
+      <table>
+        <tbody id="dbTableBody"></tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -744,12 +768,17 @@ function fixStickyHeights() {
   const nav     = document.querySelector('.top-nav');
   const toolbar = document.querySelector('.db-toolbar');
   const legend  = document.querySelector('.db-legend');
-  if (!nav || !toolbar || !legend) return;
+  const thead   = document.getElementById('dbTheadSticky');
+  if (!nav || !toolbar || !legend || !thead) return;
   const navH     = nav.getBoundingClientRect().height;
   const toolbarH = toolbar.getBoundingClientRect().height;
   const legendH  = legend.getBoundingClientRect().height;
+  // toolbar sticky top = nav height
   document.documentElement.style.setProperty('--toolbar-bottom', `${navH}px`);
-  document.documentElement.style.setProperty('--thead-top', `${navH + toolbarH + legendH}px`);
+  // legend sticky top = nav + toolbar
+  document.documentElement.style.setProperty('--legend-top', `${navH + toolbarH}px`);
+  // thead sticky top = nav + toolbar + legend
+  thead.style.top = `${navH + toolbarH + legendH}px`;
 }
 
 // ════════════════════════════════════════════════
